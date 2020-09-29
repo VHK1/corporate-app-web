@@ -1,0 +1,158 @@
+ <!--<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.2.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/animate.css"/>
+    <link rel="stylesheet" type="text/css" href="css/mockup3.css"/>
+    <link rel="stylesheet" type="text/css" href="css/ihover.min.css"/>
+    <link href="css/datepicker.css" rel="stylesheet">
+    <link href="bower_components/jquery-ui/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="bower_components/nprogress/nprogress.css">
+    <link rel="stylesheet" href="bower_components/datepicker/datepicker3.css">
+    <link rel="stylesheet" href="bower_components/clockpicker/src/clockpicker.css">
+    <link rel="stylesheet" href="bower_components/clockpicker/src/standalone.css">
+    <link href="bower_components/Select/select.css" rel="stylesheet" />
+    <link href="bower_components/Select/selectize.default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="bower_components/ion.rangeslider/css/normalize.css" />
+    <link rel="stylesheet" href="bower_components/ion.rangeslider/css/ion.rangeSlider.css" />
+    <link rel="stylesheet" href="bower_components/ion.rangeslider/css/ion.rangeSlider.skinHTML5.css" />
+    <link rel="stylesheet" href="bower_components/isteven-multselect/isteven-multi-select.css" />
+    <link rel="stylesheet" href="vendor/fancyBox/jquery.fancybox.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="vendor/ngDialog/css/ngDialog-theme-default.min.css" />
+    <link rel="stylesheet" href="vendor/ngDialog/css/ngDialog.min.css" />
+    -->
+
+
+
+    <!--<script type="text/javascript" src="vendor/spinner/angular-loading-spinner.js"></script>
+        <script type="text/javascript" src="vendor/spinner/angular-spinner.min.js"></script>
+        <script type="text/javascript" src="http://fgnass.github.io/spin.js/spin.min.js"></script>-->
+        <!--<script src="bower_components/angular-animate/angular-animate.js"></script>
+        <script src="bower_components/angular-sanitize/angular-sanitize.js"> </script>
+        <script src="bower_components/nprogress/nprogress.js"> </script>
+        <script src="bower_components/angular-ui-mask/dist/mask.js"></script>
+        <script src="bower_components/datepicker/bootstrap-datepicker.js"> </script>
+        <script src="bower_components/clockpicker/src/clockpicker.js"> </script>
+        <script src="bower_components/Select/select.js"></script>
+        <script src="bower_components/ion.rangeslider/js/ion.rangeSlider.js"></script>
+        <script src="bower_components/isteven-multselect/isteven-multi-select.js"></script>
+        <script src="bower_components/spin.js/spin.js"> </script>-->
+        <!--<script src="vendor/moment/moment.js"></script>-->
+        <!--<script type="text/javascript" src="vendor/fancyBox/jquery.fancybox.pack.js"></script>-->
+
+
+<!-- ======================= Body part End here ============================================ -->
+
+
+<!-- ======================= other JS files ============================================ -->
+<!--
+<script src="vendor/pagination/pagination.js"></script>
+
+<script src="js/tab.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/jquery.validate.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        $('.share-it').mouseenter(function () {
+            $(this).attr('src', 'img/share_onclick.png');
+
+        });
+        $('.share-it').mouseleave(function () {
+            $(this).attr('src', 'img/share.png');
+        });
+        $('.fb').mouseenter(function () {
+            $(this).attr('src', 'img/facebook_onclick.png');
+
+        });
+        $('.fb').mouseleave(function () {
+            $(this).attr('src', 'img/facebook.png');
+        });
+        $('.twit').mouseenter(function () {
+            $(this).attr('src', 'img/twitter_onclick.png');
+
+        });
+        $('.twit').mouseleave(function () {
+            $(this).attr('src', 'img/twitter.png');
+        });
+        $('.youtube').mouseenter(function () {
+            $(this).attr('src', 'img/youtube_onclick.png');
+
+        });
+        $('.youtube').mouseleave(function () {
+            $(this).attr('src', 'img/youtube.png');
+        });
+
+    });
+</script>
+<script src='http://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places'></script>-->
+
+
+$post_date = file_get_contents("php://input");
+$data = json_decode($post_date);
+echo $data->firstName." 1"
+echo $data->lastName." 1"
+echo $data->phoneNumber." 1"
+echo $data->email." 1"
+echo $data->qualification
+echo $data->vacancy." 1"
+
+
+app.js
+
+angular.module('murdockEducations', ['ngCookies','ngAnimate', 'ui.bootstrap', 'ngSanitize', 'ui.select', 'ui.router', 'ui.mask','ngDialog',"isteven-multi-select",'angularUtils.directives.dirPagination']);
+
+
+
+<!--<div id="sidebar-black" class="sidebar-nav">
+                    <nav id="navbar-black" class="navbar navbar-default" role="navigation">
+
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <span class="visible-xs"><a class="navbar-brand" >Fixed sidebar</a></span>
+                        </div>
+
+                        <div class="navbar-collapse sidebar-navbar-collapse" style="padding: 0">
+
+                            <ul class="nav navbar-nav">
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown"> Services <b class="caret"></b></a>
+                                    <ul class="dropdown-menu-custom dropdown-menu">
+                                        <li><a >Carwashes</a></li>
+                                        <li><a >Lapdances</a></li>
+                                        <li><a >Musicals</a></li>
+                                        <li><a >Tutorials</a></li>
+                                        <li><a >Catering</a></li>
+                                    </ul>
+                                </li>
+
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown">Products <b class="caret"></b></a>
+                                    <ul class="dropdown-menu-custom dropdown-menu">
+                                        <li><a >Books</a></li>
+                                        <li><a >Leaflets</a></li>
+                                        <li><a >CDs</a></li>
+                                        <li class="divider"></li>
+                                    </ul>
+                                </li>
+
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown">Profile <b class="caret"></b></a>
+                                    <ul class="dropdown-menu-custom dropdown-menu">
+                                        <li><a ><i class="glyphicon glyphicon-user"></i> Profile</a></li>
+                                        <li><a ><i class="glyphicon glyphicon-plus"></i> Account</a></li>
+                                        <li><a ><i class="glyphicon glyphicon-cog"></i> Settings</a></li>
+                                        <li><a ><i class="glyphicon glyphicon-comment"></i> Notifications</a></li>
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </div>&lt;!&ndash;/.nav-collapse &ndash;&gt;
+
+                    </nav>&lt;!&ndash;/.navbar &ndash;&gt;
+                </div>-->

@@ -1,0 +1,379 @@
+<div class="navbar navbar-expand-lg fixed-top header">
+      <div class="container-fluid">
+	  
+	  
+	  
+			<nav class="head__nav navbar navbar-dark">
+              <div id="mynav" >
+					<ul class="mybar" id="head" style="padding-left: 0px;">
+                   
+						
+						
+							
+						<li class=" hidden under" style="display:none; margin-left:-10px;">
+							<a class="head__open" ui-sref="corporate.liveTracking"><img src="images/livemap.png">&nbsp; Live Map</a>
+						</li> 
+						
+						<li class="under" style="margin-left:-10px;">
+							<a class="head__open" ui-sref="corporate.trips" ><img src="images/location1.png">&nbsp;Trips</a>
+						</li>
+				 
+						<li class="under dropdown" style="margin-left:-10px;">
+							<a class="dropdown-toggle" href="javascript:;"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><img src="images/network.png">&nbsp; Network</a>
+							<ul class="dropdown">
+								<li> <a class=""  ui-sref="corporate.myUsers" ><img src="images/network.png">&nbsp; Users</a></li>
+								<li> <a class=""   ui-sref="corporate.myQudosfave" ><img src="images/network.png">&nbsp; QudosFave</a></li>
+							
+							</ul>
+						</li> 
+						<li class="under" style="margin-left:-10px;">
+							<a class="head__open" ui-sref="corporate.settings"><img src="images/settings.png">&nbsp;Settings</a>
+						</li> 
+						
+						<li class="under" style="margin-left:-10px;">
+							<a class="head__open" ui-sref="corporate.notifications" ><i class="fa fa-bell"></i>&nbsp; Notifications</a>
+						</li> 
+						  
+						
+						
+						
+						 <div class="col-lg-8 col-md-8 book-ride-div text-center row show-xs ">
+							<a class="submit button book-ride-btn" ng-show="!ridePage" ui-sref="corporate.bookRide">New Ride Request</a>
+						</div>
+								
+						
+						
+					</ul>
+              </div>
+            </nav>
+            <button class="head__menu navbar-toggler collapsed" type="button" id="clickhead">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+          <nav class="navbar navbar-dark hidden">
+            <a onclick="closemenu()" id="backarrow" style="color:#fff; display: none;">&nbsp;<i class="fa fa-long-arrow-left"></i></a>           
+            <button class="navbar-toggler collapsed" onclick="openmenu()" >
+            <span class="navbar-toggler-icon"></span>
+            </button>
+          </nav>
+          <div id="mynav" class="mynavinfo" style="display:none;">
+              <div id="mynav" class="menuslide">
+                <ul class="mybar" id="head">
+                  
+				  
+				  
+				  
+				  
+				  
+				  
+				  
+				  
+				  
+				  
+				  
+					<li class=" under" style=" display:none; margin-left:-10px;">
+                        <a class="" ui-sref="corporate.liveTracking" onclick="closemenu()"><img src="images/livemap.png">&nbsp; Live Map</a>
+					</li> 
+					
+					<li class="under" style="margin-left:-10px;">
+                        <a class="" ui-sref="corporate.trips" onclick="closemenu()"><img src="images/location1.png">&nbsp;Trips</a>
+                    </li>
+             
+					<li class="under dropdown" style="margin-left:-10px;">
+						<a class="dropdown-toggle" href="javascript:;"  onclick="closemenu()" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><img src="images/network.png">&nbsp; Network</a>
+						<ul class="dropdown">
+							<li> <a class=""  ui-sref="corporate.myUsers" onclick="closemenu()"><img src="images/network.png">&nbsp; Users</a></li>
+							<li> <a class=""   ui-sref="corporate.myQudosfave" onclick="closemenu()"><img src="images/network.png">&nbsp; QudosFave</a></li>
+						
+						</ul>
+					</li> 
+					<li class="under" style="margin-left:-10px;">
+                        <a class="" ui-sref="corporate.settings" onclick="closemenu()"><img src="images/settings.png">&nbsp;Settings</a>
+					</li> 
+					
+					<li class="under" style="margin-left:-10px;">
+                        <a class="" ui-sref="corporate.notifications" onclick="closemenu()"><i class="fa fa-bell"></i>&nbsp; Notifications</a>
+					</li> 
+					  
+			  
+                </ul>
+				
+				
+              </div>
+			  <div class="col-lg-8 col-md-8 book-ride-div text-center row hidden-xs">
+					<a class="submit button book-ride-btn" ng-show="!ridePage" ui-sref="corporate.bookRide">New Ride Request</a>
+				</div>
+          </div>
+			
+			<a href="javascript:;"  ui-sref="corporate.bookRide" class="navbar-brand"><img src="images/logo.png"></a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+            <div id="mySidenav"  class="sidenav">
+               
+
+				<div class="slide" ng-show="!editMode"  id="slide">
+					<span class="myprofile"><i class="fa fa-user-circle myprofileuser" aria-hidden="true"></i>&nbsp;&nbsp; My Profile
+					<a onclick="closeNav()" class="rclosebtn">&nbsp;<i class="fa fa-times"></i></a></span>
+					<hr class="myprofilehr">
+					<button class="btn-outline-primary btn-md editbtn desktopback" onclick="closeNav()" style="display:none;"><i class="fa fa-long-arrow-left"></i>&nbsp; Back</button><br>
+
+					<img src="{{driverDetails.driver_image}}" ng-model="usernewimage" id="dprofileimageone"> <p class="name">{{driverDetails.driver_name}} <br><span style="font-size:14px;font-weight:400;"> {{driverDetails.location}} </span></p>
+					<hr style="clear:left;">
+					<h4 class="ginfo">General Information</h4>
+					<p class="gpara"> <b>Name : </b> {{driverDetails.driver_name}}<br>
+					<b>Email : </b>{{driverDetails.driver_email}}<br>
+					<b>Phone : </b>{{driverDetails.driver_mobile}}<br>
+					<b>Address : </b> {{driverDetails.address}}
+					</p>
+					<hr>
+					<h4 class="ginfo">Other Information</h4>
+					<p class="gpara"> <b>Invite Code:</b> {{driverDetails.referral_code}}<br>
+					</p>
+					<button class="btn-outline-primary btn-md editbtn" style="font-weight: bold; color:#777;" ng-click="editProfile()">Edit Details</button> 
+                </div> 
+
+				<div class="slide " ng-show="editMode" id="editinfo"> 
+					<span class="myprofile"><i class="fa fa-pencil-square-o myprofileuser" aria-hidden="true"></i>&nbsp;&nbsp; Edit Profile
+						<a ng-click="closeEdit()" class="rclosebtn">&nbsp;<i class="fa fa-times"></i></a></span>
+					<hr class="myprofilehr">
+					<button class="btn-outline-primary btn-md editbtn desktopback" onclick="closeEdit()" style="display:none;"><i class="fa fa-long-arrow-left"></i>&nbsp; Back</button><br>
+					<form method="post" ng-submit="submitDetails()">
+						
+						<hr style="clear:left;">
+						
+						<p class="ginfo1">Edit general information</p>
+						
+						<div class="input-container">
+							<i class="fa fa-map-marker icon"></i>
+							<input class="input-field autocomplete" id="base_location" type="text" autocomplete="off" ng-model="pop.address" required/>
+						</div>
+
+					
+						<button type="submit" class="btn btn-primary btn-sm updatebtn" style="color:#fff;">Update</button>  
+						
+					</form>
+              </div>
+            </div>
+       
+        <div class="pos-f-t">
+          <div class="navbar-collapse collapse" id="navbarResponsive" style="">
+            <ul class="navbar-nav bar dropdown-pad" id="head">
+         
+			
+					
+					<li class="nav-item under hidden" style="display:none">
+                        <a class="" ui-sref="corporate.liveTracking"><img src="images/livemap.png">&nbsp; Live Map</a>
+					</li> 
+					
+					<li class="nav-item under">
+                        <a class="" ui-sref="corporate.trips"><img src="images/location1.png">&nbsp;Trips </a>
+                    </li>
+                  
+					
+					<li class="nav-item under dropdown">
+                        <a class="dropdown-toggle" href="javascript:;" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><img src="images/network.png">&nbsp; Network</a>
+						<div class="dropdown-menu dropdown-menu-right user network-menu" aria-labelledby="navbarDropdown">
+							<a class="drop-item-d"  ui-sref="corporate.myUsers"><i class="fa fa-user fa-fw"></i> &nbsp; Users</a><hr class="rule">
+							 <a class="drop-item-d"   ui-sref="corporate.myQudosfave"><i class="fa fa-car fa-fw"></i> &nbsp; QudosFave</a>
+						</div>
+						
+					</li> 
+					
+					
+					
+				
+	  
+					<li class="nav-item under">
+                        <a class="" ui-sref="corporate.settings"><img src="images/settings.png"><span class="ipad-hidden">&nbsp; Settings</span></a>
+					</li> 
+					
+					<li class="nav-item under" style="">
+                        <a class="" ui-sref="corporate.notifications" ><i class="fa fa-bell"><sup ng-show="totalNotifications>0" class="notif-badge">{{totalNotifications}}</sup></i><span class="ipad-hidden">&nbsp; Notification</span></a>
+					</li> 
+			  
+            </ul>
+			
+			 
+          </div>
+        </div>
+		
+		<div class="col-lg-2 col-md-3 book-ride-div text-right row hidden-xs">
+				<a class="submit button book-ride-btn" ng-show="!ridePage" ui-sref="corporate.bookRide">New Ride Request</a>
+			</div>
+			
+			
+        <ul class="nav navbar-nav ml-auto rlogout" style="
+    padding-left: 0;
+    margin-left: 0 !important;
+">
+            <li class="nav-item dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" id="download"></span> 
+                <img ng-src="{{driverDetails.driver_image}}" ng-model="usernewimage" id="dprofileimagetwo"> 
+                <span class="uname"> {{driverDetails.first_name}}</span> </a>
+              <div class="dropdown-menu dropdown-menu-right user" aria-labelledby="download">
+                <a onclick="openNav()"><i class="fa fa-user fa-fw"></i> My Profile</a><hr class="rule">
+                <a ng-click="logoutConfirm()" class="dropdown-item"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+				
+				 <a ng-click="notifyMe()" class="dropdown-item hidden" style="display:none"><i class="fa fa-sign-out fa-fw"></i> notifyMe</a>
+				 
+              </div>
+            </li>
+          </ul>
+      </div>
+    </div>
+<!-- <div class="col-sm-1"></div> -->
+<div ui-view class="col-sm-12"></div>
+
+<div id="confirmLogout" class="modal" role="dialog" data-keyboard="false" data-backdrop="static" >
+    <div class="modal-dialog modal-dialog-centered">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal"  style="margin-top:-4px;font-size: 1.7em;margin-right: 4px;">&times;</button>
+                <div style="text-align: center">
+                  <h5 class="modal-title" style="margin-top: 40px;font-size: 20px; font-weight: 700;" >You are logging out</h5>
+                  <p style="font-size:13px;    margin-bottom: 35px;">Are you sure you want to logout?</p>
+                </div>              
+                <div style="text-align: center;margin-bottom: 45px;" class="logoutbtn">
+                  <button class="btn btn-primary login_button" data-dismiss="modal" ng-click="logout()" type="submit" style="padding:7px 33px 7px 33px; margin-right:7px;">Log out</button>
+                  <!-- <button class="btn btn-outline login_button" data-dismiss="modal" type="submit" style="padding: 7px 33px 7px 33px; border:1px solid #aaa; text-shadow: none;">Cancel</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="bookingConfirmed" class="modal" role="dialog" data-keyboard="false" data-backdrop="static" >
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" >
+
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal"  style="margin-top:-12px;margin-right:-12px;font-size: 2em;opacity: 1"><img src="img/PNG/PopUps/icon-cross.png"></button>
+                <h6 class="modal-title2" style="color: #6c6c6c;width: 320px;margin-top:32px">Booking created successfully</h6>
+                <!--<div ng-show="authMsg" class="alert alert-danger text-center">{{authMsg}}</div>-->
+                <button class="login_button" data-dismiss="modal" ui-sref="provider.booking.upcoming" type="submit" style="width: 130px;height: 50px;">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="alertCredModal" class="modal" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="margin-top: 300px;">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h4 class="text-center" style="color:#383838">Your session has expired, you are being logged out.</h4>
+                <button class="login_button" data-dismiss="modal"  style="width: 130px;height: 50px;" ng-click="logoutClose()" type="submit">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="confirmDiscard" class="modal" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-body">
+                <h4 class="text-center" style="color:#383838">Going back would cancel the booking. Do you want to proceed ?</h4>
+                <button class="login_button" style="width: 25%;" data-dismiss="modal" ng-click="discard();" type="submit">Yes</button><!--ui-sref="driver.home.location"-->
+                <button class="login_button" style="width: 25%" data-dismiss="modal" ng-click="dontDiscard();" type="submit">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="loading" class="modal" role="dialog">
+    <div class="modal-dialog">
+        <div style="position: absolute;top: 50%;left: 50%;margin-top: 70px;margin-left: -50px;width: 100px;height: 100px;">
+          <img src="app/img/ring-alt.svg" />
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+
+
+    $(document).bind(
+            'touchmove',
+            function(e) {
+                if($(".notfMenuMobile").hasClass("open"))
+                    $(".notfMenuMobile").toggleClass("open");
+            }
+    );
+    if ( $(window).width() < 800) {
+        $('#subMenu ul').on('click', function () {
+            $(".subMenu ul.nav div").css("transform", "rotateX(-88deg)");
+        });
+        $('li a').on('click', function () {
+            $(".subMenu ul.nav div").css("transform", "rotateX(0deg)");
+        });
+        window.addEventListener('click', function (e) {
+
+            if (document.getElementById('navMenu').contains(e.target)) {
+            } else {
+                $(".subMenu ul.nav div").css("transform", "rotateX(-88deg)");
+            }
+        })
+    }
+	$('body').removeClass('login-page');
+
+	$(document).ready(function () {
+		  "use strict";
+		  /* Header*/
+		  $('.head__menu').on('click', function() {
+			$(this).toggleClass('header__menu--active');
+			$('.head__nav').toggleClass('header__nav--active');
+
+		  });
+	
+	  $(document).on('click','.head__open',function(){
+		var status = $('.head__menu').hasClass('header__nav--active');
+		console.log(status);
+		if(status != true)
+		{
+		  $('.head__nav').removeClass('header__nav--active');
+		  $('#clickhead').removeClass('header__menu--active');
+		}
+		else
+		{
+		  $('.head__nav').addClass('head__nav');
+		  $('#clickhead').addClass('header__menu'); 
+		}
+	  });
+	});
+
+  
+  
+</script>
+
+ <script type="text/javascript">
+  $('#selectpdpimage').change(function(e){
+      if (this.files && this.files[0]) {
+        var reader = new FileReader();
+        var fileName = e.target.files[0].name;
+        reader.onload = function (e) {
+          $('#editdpimage').attr('src', e.target.result);
+          /*$('#editfilename').html(fileName);*/
+        }
+       reader.readAsDataURL(this.files[0]);
+     }
+    });
+</script> 

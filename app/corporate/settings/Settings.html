@@ -1,0 +1,55 @@
+<div class="container page">
+      <div class="page-header" id="banner">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12">
+         
+		
+          </div>
+        </div>
+      </div>
+
+      <!-- Tables
+      ================================================== -->
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="page-header">
+            </div>
+            Settings Goes Here
+               
+          </div>
+        </div>
+</div>
+         
+<script>
+    function WindowCloseHanlder()
+    {
+        console.log("web access token is getting removed");
+        App.controller('driverTripsController', function($rootScope, $scope, $http, $cookies, $cookieStore, MY_CONSTANT, $state, ngDialog) {
+            if (!$cookieStore.get('web_access_token')) {
+              window.location.href = MY_CONSTANT.vendorBaseURL+'affiliatelogin.html';;
+            }
+        });
+    }
+</script>
+<script type="text/javascript">
+  $(document.body).on('show.bs.collapse', '.panel-collapse' ,function(){
+      $('.display').show();
+  });
+  
+  $(document.body).on('hide.bs.collapse', '.panel-collapse' ,function(){
+    $('.display').hide();
+  
+  });
+  </script>
+<!-- <script type="text/javascript">
+$(function(){
+  $("#drivertripsbtnicon").on({
+   mouseenter: function(){
+    $('#drivercariconbtn').attr('src','images/cariconwhitep.png');
+  },
+  mouseleave: function(){
+    $('#drivercariconbtn').attr('src','images/caricon.png');
+  }
+  }); 
+});
+</script> -->

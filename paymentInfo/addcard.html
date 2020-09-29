@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="utf-8">
+	<meta content="width=device-width" name="viewport">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<!-- <link rel="stylesheet" type="text/css" href="paymentInfo/assets/css/normalize.css"> -->
+	<link rel="stylesheet" type="text/css" href="paymentInfo/assets/css/demo.css">
+	<link rel="stylesheet" type="text/css" href="paymentInfo/assets/css/paymentInfo.css">
+	<link rel="shortcut icon" href="assets/favicon.ico">
+	<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+	<title>Payment Info</title>
+</head>
+<body>
+	<div class="container">
+	<div id="hidethis" style="padding: 20px 0px 0 0px;">
+			<ul style="list-style: none;padding: 0;margin-bottom: 0;border-bottom: 0;">
+					<li style="border-bottom-left-radius: 0px;border-bottom-right-radius: 0px;border: solid 0.5px #dce5eb;">
+							<span class="ulPaymentMethod">Add Card</span>
+					</li>
+					<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 formDiv formFields">
+						<div style="clear:both"></div>
+	<section>
+		<form>
+			<fieldset class="credit-card-group">
+				<legend>Credit Card Information</legend>
+				<label for="card-number">Credit Card Number</label>
+				<input placeholder="1234 5678 9012 3456" pattern="[0-9]*" type="text" class="card-number" id="card-number">
+				<label for="card-number">Expiration Date</label>
+				<input placeholder="MM/YY" pattern="[0-9]*" type="text" class="card-expiration" id="card-expiration">
+				<label for="card-number">CVV Number</label>
+				<input placeholder="CVV" pattern="[0-9]*" type="text" class="card-cvv" id="card-cvv">
+				<!-- <label for="card-number">Billing Zip Code</label>
+				<input placeholder="ZIP" pattern="[0-9]*" type="text" class="card-zip" id="card-zip"> -->
+			</fieldset>
+		</form>
+	</section>
+	<div class="loginButtonDiv" style="text-align: center">
+			<button type="submit" class="loginButton" onclick="submitDetails()">
+					Submit
+			</button>
+	</div>
+</ul>
+</div>
+</div>
+
+<style>
+	label{
+		color:#919191;
+	}
+</style>
+	<script src="paymentInfo/assets/scripts/libs/modernizr.js"></script>
+	<script src="paymentInfo/assets/scripts/libs/jquery.js"></script>
+	<script src="paymentInfo/assets/scripts/libs/jquery.inputmask.js"></script>
+	<script src="paymentInfo/assets/scripts/libs/jquery.inputmask.date.extensions.js"></script>
+	<script src="paymentInfo/assets/scripts/app.js"></script>
+</body>
+</html>

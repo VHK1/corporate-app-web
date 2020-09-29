@@ -1,0 +1,182 @@
+<style>
+.switcher {
+    position: relative;
+    display: inline-block;
+    width: 90px;
+    height: 44px;
+    border-radius: 9px;
+}
+
+
+.switcher input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slidercheck {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #bbb;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 4px;
+}
+
+.slidercheck:before {
+    position: absolute;
+    content: "";
+    height: 36px;
+    width: 36px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slidercheck {
+    background-color: #1f8dc6;
+}
+
+input:focus + .slidercheck {
+  box-shadow: 0 0 1px #1f8dc6;
+}
+
+input:checked + .slidercheck:before {
+  -webkit-transform: translateX(46px);
+  -ms-transform: translateX(46px);
+  transform: translateX(46px);
+}
+.slidercheck .off {
+    display: block;
+    text-align: right;
+    color: black;
+    color: white;
+    padding: 7px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.slidercheck .on {
+    display: none;
+    color: white;
+    padding: 7px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+input:checked + .slidercheck .off{
+	display:none;
+}
+
+input:checked + .slidercheck .on{
+	display:block;
+}
+
+
+
+
+
+
+
+
+</style>
+
+ <div class="container page" id="Trips">
+      <div class="page-header" id="banner">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12">
+			  <div class="row">
+				
+					<div class="col-md-10">
+						<a class="btn btn-outline-primary btn-md tripsbtn " data-hover="images/caricongrey.png"  data-unhover="images/caricon.png" style="float:left; margin-right:20px;" ui-sref="corporate.listCards" id="drivertripsbtnicon">My Cards<img src="images/document1.png" style="padding-left:10px;" id="drivercariconbtn"></a>
+						
+						<a class="btn btn-outline-primary btn-md tripsbtn " ng-if="driverDetails.subtype_id == 1"  data-hover="images/caricongrey.png"  data-unhover="images/caricon.png" style="float:left; margin-right:20px;" ui-sref="corporate.bankDetails" id="drivertripsbtnicon">Bank Details<img src="images/document1.png" style="padding-left:10px;" id="drivercariconbtn"></a>
+						
+						<a class="btn btn-outline-primary btn-md tripsbtn " data-hover="images/caricongrey.png"  data-unhover="images/caricon.png" style="float:left; margin-right:20px;" ui-sref="corporate.documents" id="drivertripsbtnicon">My Documents<img src="images/document1.png" style="padding-left:10px;" id="drivercariconbtn"></a>
+						
+						<a class="btn btn-outline-primary btn-md tripsbtn " data-hover="images/caricongrey.png"  data-unhover="images/caricon.png" style="float:left; margin-right:20px;" ui-sref="corporate.staff" id="drivertripsbtnicon">My Staff<img src="images/document1.png" style="padding-left:10px;" id="drivercariconbtn"></a>
+						
+						<a class="btn btn-outline-primary btn-md tripsbtn active-page" style="float:left; margin-right:20px;" ui-sref="corporate.paymentSettings" id="drivertripsbtnicon">More <i style=" font-size: 21px;    vertical-align: middle;    margin-left: 5px;" class="fa fa-cog"></i></a>
+						
+					</div>
+					
+
+				
+				
+			  </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tables
+      ================================================== -->
+        <div class="row">
+          <div class="col-lg-12">
+		  
+		  
+            <div class="page-header">
+            </div>
+              <table class="table table-responsive trips desktop">
+                <thead>
+                  <tr class="frow">
+                    <th scope="col">Setting Type </th>
+					<th scope="col">Description</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody >
+				
+				
+                  <tr>
+                    <td>Rider Card Payment</td>
+                    <td>Payment of use is the rider card</td>
+                    <td><label class="switcher" >
+					  <input type="checkbox" ng-model="RiderCard" ng-click="changeRiderSetting()" value="1" ng-checked="(settings.RiderCardEnabled == 1)"/>
+					  <span class="slidercheck"><span class="off">OFF</span><span class="on">ON</span></span>
+					</label></td>
+					
+                  </tr>
+				  
+				   <tr >
+                    <td>Corporate Card Payment</td>
+                    <td>Payment of use is the corporate card</td>
+                    <td>
+					
+					<label class="switcher" >
+					  <input type="checkbox" ng-model="CorpCard" ng-click="changeCorpSetting()" value="1"  ng-checked="(settings.CorpCardEnabled == 1)" />
+					  <span class="slidercheck"><span class="off">OFF</span><span class="on">ON</span></span>
+					</label>
+
+</td>
+					
+                  </tr>
+				  
+				  
+                </tbody>
+              
+              </table>
+
+          </div>
+        </div>
+    </div>
+
+	
+
+
+<script>
+ $(document).on('show.bs.modal', '.modal', function (event) {
+            var zIndex = 1040 + (10 * $('.modal:visible').length);
+            $(this).css('z-index', zIndex);
+            setTimeout(function() {
+                $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+            }, 0);
+        });
+
+
+</script>

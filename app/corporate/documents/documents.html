@@ -1,0 +1,329 @@
+<style>.combodate_class{
+	text-align: center;
+    padding: 0 20px;
+}
+.edit-modal-overlay {
+    z-index: 3;
+    display: block;
+    width: 100%;
+    height: 250px;
+    position: absolute;
+    top: 0;
+}
+.edit-modal-overlay-1 {
+	z-index: 3;
+    display: block;
+    width: 50%;
+    height: 67px;
+    position: absolute;
+    top: 8%;
+    right: 0;
+}
+
+@media screen and (max-width:767px){
+	.edit-modal-overlay {
+	  height:477px
+	}
+	.edit-modal-overlay-1 {
+		 
+		width: 93%;
+		height: 67px;
+		top: 44%;
+		right: unset;
+	}
+}
+@media screen and (max-width:480px){
+	.edit-modal-overlay {
+	  height:477px
+	}
+	.edit-modal-overlay-1 {
+		 
+		width: 93%;
+		height: 67px;
+		top: 44%;
+		right: unset;
+	}
+}
+</style> <div class="container page" id="Trips">
+      <div class="page-header" id="banner">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12">
+           
+				<a class="btn btn-outline-primary btn-md tripsbtn " data-hover="images/caricongrey.png"  data-unhover="images/caricon.png" style="float:left; margin-right:20px;" ui-sref="corporate.listCards" id="drivertripsbtnicon">My Cards<img src="images/document1.png" style="padding-left:10px;" id="drivercariconbtn"></a>
+				
+				<a class="btn btn-outline-primary btn-md tripsbtn " ng-if="driverDetails.subtype_id == 1" data-hover="images/caricongrey.png"  data-unhover="images/caricon.png" style="float:left; margin-right:20px;" ui-sref="corporate.bankDetails" id="drivertripsbtnicon">Bank Details<img src="images/document1.png" style="padding-left:10px;" id="drivercariconbtn"></a>
+						
+				<a class="btn btn-outline-primary btn-md tripsbtn active-page" data-hover="images/caricongrey.png"  data-unhover="images/caricon.png" style="float:left; margin-right:20px;" ui-sref="corporate.documents" id="drivertripsbtnicon">My Documents<img src="images/document1.png" style="padding-left:10px;" id="drivercariconbtn"></a>
+						
+						
+				<a class="btn btn-outline-primary btn-md tripsbtn " data-hover="images/caricongrey.png"  data-unhover="images/caricon.png" style="float:left; margin-right:20px;" ui-sref="corporate.staff" id="drivertripsbtnicon">My Staff<img src="images/document1.png" style="padding-left:10px;" id="drivercariconbtn"></a>
+						
+            <button class="btn btn-outline-primary btn-md tripsbtn nextclass" style="float:right; display:none">Next</button>
+            <button class="btn btn-outline-primary btn-md tripsbtn adddocbtn" ng-if="(totalTypes>totalItems)" ng-click="addDocDialog()" data-toggle="modal" data-target="#document_dialog">Add Documents</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tables
+      ================================================== -->
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="page-header">
+            </div>
+              <table class="table table-responsive trips desktop">
+                <thead>
+                  <tr class="frow">
+                    <th scope="col">ID</th>
+                    <th scope="col">Document Type</th>
+                    <th scope="col">Document</th>
+                    <th scope="col">Added on</th>
+                    <th scope="col">Expiry Date</th>
+                    <th scope="col">Status</th>
+                    <!--<th scope="col">Reminder Days</th>-->
+                  </tr>
+                </thead>
+                <tbody ng-if="docs.length > 0">
+                  <tr ng-repeat="doc in docs track by $index" >
+                    <td>{{doc.doc_id}}</td>
+                    <td>{{doc.document_name}}</td>
+                    <td><img src="images/doc.png" class="docimg">
+                        <ul class="nav navbar-nav ml-auto">
+                          <li class="nav-item dropdown tabledrop">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="javascript(void)" id="download">
+                             <span class="caret"></span></a>
+                            <div class="dropdown-menu user" aria-labelledby="download">
+                              <a class="dropdown-item"  ng-click="viewDocDialog(doc,false)" data-toggle="modal" data-target="#document_dialog_edit" href="javascript(void)">View</a>
+                              <a class="dropdown-item" ng-click="viewDocEditDialog(doc,true)" data-toggle="modal" data-target="#document_dialog_edit" href="javascript(void)">Edit</a>
+                            </div>
+                          </li>
+                        </ul>
+                    </td>
+                    <td>{{doc.date_added|date:'MMM dd yyyy,'}} <br>{{doc.date_added|date:'hh:mm a'}}</td>
+                    <td>{{doc.expiry_date|date:'MMM dd yyyy,'}} <br>{{doc.expiry_date|date:'hh:mm a'}}</td>
+                    <td ng-if="doc.is_verified==1">
+                      <i  class="fa fa-check-circle" style="color:#32CD32;font-size:18px;"></i>&nbsp; Verified</td>
+                      <td ng-if="doc.is_verified==0" ><i  class="fa fa-exclamation-circle" style="color:#ea5d08; font-size:18px;"></i>&nbsp; Pending
+                      </td>
+                    <!--<td>{{doc.reminder_before}}</td>-->
+                  </tr>
+                </tbody>
+                <tbody ng-if="docs.length == 0">
+                        <tr>
+                            <td colspan="6" class="text-center">No Documents Found</td>
+                        </tr>
+                    </tbody>
+              </table>
+
+           
+          </div>
+        </div>
+    </div>
+
+
+        <div class="modal fade" id="document_dialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+           <h4>{{verifymsg}}</h4>
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="row modaltitle">
+                    <div class="col-sm-11 col-12">
+                      <button type="button" class="close" data-dismiss="modal" style="font-size:32px;float:right;padding:5px;">&times;</button>
+                      <h5 id="mtitle" style="text-align: center;">Add Document</h5>
+                    </div>
+                    
+                  </div>
+                  <div class="modal-body modal-lg">
+                   
+                        <div ng-show="doc.successMsg" class="alert alert-success text-center">{{doc.successMsg}}</div>
+                        <div ng-show="doc.errorMsg" class="alert alert-danger text-center">{{doc.errorMsg}}</div>
+                      <div class="row modalrow">
+                          <div class="col-sm-6 modalrowleft">
+                                <div>
+                                  <a class='btn btn-default border uploaddoc mb-1' href='javascript:;' id="afterborder" style="cursor:pointer;">
+                                    <i class="fa fa-paperclip mr-2 paperlink" aria-hidden="true"></i><p style="cursor: pointer;">Upload new document <br> as an attachment</p>
+                                    <input type="file" accept="image/x-png,image/jpeg" class="form-control form-control-lg upload tlc_img" style='filter: alpha(opacity=0);opacity:0;margin-top:-71px;margin-left:-35px;width: 100%; display: block;' name="file_source" image="image" onchange="angular.element(this).scope().file_to_upload(this.files)" data-button-text="Single" data-class-button="btn btn-default" data-classinput="form-control inline" nv-file-select="" uploader="uploader" id="mydocupload">
+                                    <p ng-if="type==0" class="nowrap">{{doc.doc_file_name}}</p> 
+                                  </a>
+                                    <!-- <div class="container mydocorhr">
+                                      <hr class="hrtext">
+                                          <p class="hrp">Or</p>
+                                    </div> 
+                                  <a ng-hide="captureImage" ng-click="captureImage=true;doc.capturedImage=undefined" class='btn btn-default border capturedoc' style="cursor: pointer;">-->
+                                  <!--<i class="fa fa-camera mr-2" aria-hidden="true"></i><p>Open Camera and <br>take a picture</p>-->
+                                 <!--</a>-->
+                                     <!--<img class="captured-image" ng-show="doc.capturedImage" src="{{doc.capturedImage}}" alt="captured image" >-->
+                                     <!--<div ng-if="captureImage && !editDoc">-->
+                                         <!--<ng-webcam-->
+                                             <!--config="camConfig"-->
+                                             <!--on-load="onCameraLoad()"-->
+                                             <!--on-error="onCameraCaptureError(err)"-->
+                                             <!--on-capture-complete="onCameraCaptureComplete(src)">-->
+                                        <!--</ng-webcam>
+                                        <input type="button" class="btn btn-primary btn-md mt-1 mb-1" value="Take Picture" ng-click="takePicture()">
+                                   </div>-->
+                                </div>
+                          </div>
+
+                          <div class="col-sm-6 modalrowright">
+                              <label> Choose Document Type</label>
+                              <label ng-if="type==1"> Document Type : {{docName}}</label>
+                              <div class="input-container">
+                                <i class="fa fa-pencil-square-o icon"></i>
+                              
+							          <select class="form-control" ng-options="documentType as documentType.document_name for documentType in documentTypes |  orderBy : '-document_type_id' track by documentType.document_type_id" ng-model="doc.docType" ng-change="typeSelect(doc.docType)">
+                                  <option value="">Select Document Type*</option>
+                                </select>
+								
+								
+                              </div>
+                              <label> Enter Expiry Date* of the Documents</label>
+                             <!--  <div class="input-container datepickercustom">
+                                <i class="fa fa-calendar icon"></i>
+                                <input class="input-field cal" accept="image/*" image="image" onchange="angular.element(this).scope().file_to_upload(this.files)" data-button-text="Single" data-class-button="btn btn-default" data-classinput="form-control inline" nv-file-select="" uploader="uploader"
+                                    class="form-control upload tlc_img" required data-errormessage="Please select a file"/>
+                              </div> -->
+                              <div class="input-container">
+                                    <i class="fa fa-calendar icon"></i>
+                                  <!--<input ng-disabled="!editDoc" type="text" ng-model="doc.expiry_date" class="form-control input-field cal" uib-datepicker-popup="{{format}}" ng-readonly='true' datepicker-options="dateOptions" is-open="popup.opened" close-text="Close" id="datepicker">-->
+                                  <input type="text" ng-model="doc.expiry_date" class="form-control input-field cal" id="date"  data-format="MM/DD/YYYY" data-template="MMM DD YYYY"  name="date"> 
+
+                                  <!-- <span class="input-group-btn" required>
+                                      <button type="button" class="btn btn-default" ng-click="open()" style="height:31px"><i style="color:#209e91" class="fa fa-calendar"></i></button>
+                                  </span> -->
+                              </div>
+
+                               <!--<div class="input-container">
+                                <i class="fa fa-clock-o icon" aria-hidden="true"></i>
+                                <input type="text" placeholder="Remind Duration (in Days)" class="form-control input-field cal" ng-model="doc.reminder_before" required="required" autocomplete="off">
+                              </div>-->
+
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-12 addbtn">
+                              <div class="btn-align" >
+                                  <button type="submit" ng-click="addEditDocType(doc,0)" class="btn btn-primary btn-md" ng-disable="submitText!='Submit'" style="border:1px solid #999;">{{submitText}}</button>
+                               </div>
+                          </div>
+                      </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="modal fade" id="document_dialog_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <h4>{{verifymsg}}</h4>
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="row modaltitle">
+                    <div class="col-sm-11 col-12">
+                      <button type="button" class="close" data-dismiss="modal" style="font-size:32px;float:right;padding:5px;">&times;</button>
+                      <h5 id="mtitle" style="text-align: center;">Document Details</h5>
+                    </div>
+                  </div>
+				  <h5 id="mtitle" class="mobile" style="text-align: center;">{{doc.docTypeName}}</h5>
+                  <div class="modal-body modal-lg">
+                   <div class="edit-modal-overlay" ng-show="!showUpdate" ></div>
+                   <div class="edit-modal-overlay-1" ng-show="showUpdate" ></div>
+                        <div ng-show="doc.successMsg" class="alert alert-success text-center">{{doc.successMsg}}</div>
+                        <div ng-show="doc.errorMsg" class="alert alert-danger text-center">{{doc.errorMsg}}</div>
+                      <div class="row modalrow">
+                          <div class="col-sm-6 modalrowleft">
+                                <img src="{{doc.document_url}}" alt="{{doc.docTypeName}}" style="width:50%;padding:10px 0;max-height: 100px">
+                                  <p>{{doc.docTypeName}}</p>
+                                 <div>
+                                     <a class='btn btn-default border uploaddoc' href='javascript:;' style="cursor: pointer;" id="afterbordero">
+                                         <i class="fa fa-paperclip mr-2 paperlink" aria-hidden="true"></i><p style="cursor: pointer;text-align: center;">Upload new document <br> as an attachment</p>
+                                         <input type="file" accept="image/x-png,image/jpeg" class="form-control form-control-lg upload tlc_img" style='filter: alpha(opacity=0);opacity:0;margin-top:-71px;margin-left:-35px;' name="file_source" image="image" onchange="angular.element(this).scope().file_to_upload(this.files)" data-button-text="Single" data-class-button="btn btn-default" data-classinput="form-control inline" nv-file-select="" uploader="uploader" id="mydocuploado">
+                                         <p class="nowrap" style="margin-left:32px;">{{doc.doc_file_name}}</p>
+                                     </a>
+                                   
+                                 </div>
+                          </div>
+
+                          <div class="col-sm-6 modalrowright">
+                              <label> Choose Document Type</label>
+                              <label ng-if="type==1"> Document Type : {{docName}}</label>
+                              <div class="input-container">
+                                <i class="fa fa-pencil-square-o icon"></i>
+                                
+								
+								<select class="form-control" ng-options="documentType as documentType.document_name for documentType in documentTypes |  orderBy : '-document_type_id' track by documentType.document_type_id" ng-model="doc.docType" ng-change="typeSelect(doc.docType)">
+                                  <option value="">Select Document Type*</option>
+                                </select>
+								
+								
+                              </div>
+                              <label> Enter Expiry Date* of the Documents</label>
+                         
+                              <div class="input-container">
+                                    <i class="fa fa-calendar icon"></i>
+                                   
+                                  <input type="text" ng-model="doc.expiry_date" class="form-control input-field cal" id="edate" data-format="MM/DD/YYYY" data-template="MMM DD YYYY"  name="edate">
+                                      
+                              </div>
+
+                          </div>
+                      </div>
+
+                      <div class="row">
+                          <div class="col-sm-12 addbtn">
+                              <div class="btn-align" >
+                                  <button type="submit" ng-click="editDocument(doc)" ng-disabled="submitUpdate!='Update'" ng-show="showUpdate" class="btn btn-primary btn-md" style="border:1px solid #999;">{{submitUpdate}}</button>
+                              </div>
+                          </div>
+                      </div>
+                   
+                  </div>
+                </div>
+              </div>
+            </div>
+
+<script>
+        $('#datepicker').datepicker({
+            uiLibrary: 'bootstrap4'
+        });
+</script>
+<script>
+    $('.panel-faq').on('show.bs.collapse', function() {
+        $(this).addClass('active');
+    });
+
+    $('.panel-faq').on('hide.bs.collapse', function() {
+        $(this).removeClass('active');
+    });
+    App.controller('documentsController', function($rootScope, $scope, $http, $cookies, $cookieStore, MY_CONSTANT, $state, ngDialog, $timeout) {
+        if (!$cookieStore.get('access_token')) {
+            $state.go("corporate_login");
+        }
+    });
+</script>
+<!-- <script type="text/javascript">
+$(function(){
+  $("#mydocbtnicon").on({
+   mouseenter: function(){
+    $('#mydocbtnimgicon').attr('src','images/whitedocicon.png');
+  },
+  mouseleave: function(){
+    $('#mydocbtnimgicon').attr('src','images/docicon.png');
+  }
+  });
+});
+</script> -->
+<script type="text/javascript">
+$('#mydocuploado').click(function() {
+    $('#afterbordero').css("cssText", "border:1px solid #1f8dc6!important;");
+});
+$('#mydocupload').click(function() {
+    $('#afterborder').css("cssText", "border:1px solid #1f8dc6!important;");
+});
+
+$('#date').combodate({
+    firstItem: 'name', 
+});    
+$('#edate').combodate({
+    firstItem: 'name', 
+});    
+
+</script>

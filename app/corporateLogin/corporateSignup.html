@@ -1,0 +1,445 @@
+<style>
+a.submit-login,a.submit-login:hover,a.submit-login:active,a.submit-login:focus {
+    background-color: #1f8dc6 !important;
+    color: #fffefe !important;
+}
+.loaders{
+	top: -18%;
+	}
+</style><header class="header header--white">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="header__content">
+						<a href="javascript:;" ng-click="homelink()" class="header__logo">
+							<img ng-src="img/logo--white.svg" alt='logo'>
+							<!-- <!-- <object type="image/svg+xml" data="img/logo--white.svg"></object> -->
+							 <!-- <object type="image/svg+xml" data="img/logo--black.svg"></object>  -->
+              <!-- <object type="image/svg+xml" data="img/logo--white.svg"></object>  -->
+						</a>
+
+						<nav class="header__nav">
+                            <!--<a href="driverlogin.html">Drive</a>
+                            <a href="riderlogin.html">Ride</a>-->
+                            <a href="javascript:;" ng-click="homelink()">Home</a>
+
+                            <div class="header__social">
+                                <a href="https://twitter.com/ridequdos"><i class="icon-tw"></i></a>
+                                <a href="https://www.facebook.com/QudosRide/"><i class="icon-fb"></i></a>
+                                <a href="https://www.linkedin.com/company/ridequdos/"><i class="icon-linkedin"></i></a>
+                                <a href="https://www.instagram.com/qudosride/"><i class="icon-instagram"></i></a>
+							</div>
+						</nav>
+
+						<button class="header__menu" type="button">
+							<span></span>
+							<span></span>
+							<span></span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<section class="sign">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 col-xl-10 offset-xl-1">
+					<div class="sign__content">
+
+                        <!--Start Row Sign Up-->
+						<div class="row">
+
+
+
+                        <div class="popup-main-content">
+							
+							
+							<div ng-show="success">
+							
+							  <!--Start Sign up Step 5-->
+								<div id="signup-4" ng-show="!signup1&&!signup2&&!signup3&&signup4&&otpVerified" class="row row-input">
+									<div class="col-md-12"><p class="small-show"><img src="img/mail-sucess.png"  alt="sucess"> </p></div>
+									<div class="col-md-6">
+										<h3>Welcome to Qudos</h3>
+										<p class="top-margin">Please verify email by clicking on the link sent to the email you provided.</p>
+										<div class="row clear">
+											<div class="col-md-6">
+												<a ui-sref="corporate_login" class="submit-login">Login</a>
+											</div>
+											<div class="col-md-6" style="visibility: hidden">
+												 <a href="#" class="submit-veri">Resend Verification</a>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-md-6 small-hide">
+										 <p align="center"><img src="img/mail-sucess.png" width="200" height="200" alt="sucess">
+										 </p>
+									</div>
+								</div>
+							</div>
+									
+									
+									
+							<div ng-show="!success">
+											
+								 <div class="row row-input">
+
+									<div id="main-hidden" class="col-md-5">
+										<h3 id="signup-title">Corporate Sign Up</h3>
+										<ul id="ny"  ng-show="!signup4"  class="signup-step">
+											<li id="li-step0" ng-click="showStep1()" ng-class="{active: signup1 == '1'}"><a id="0-step"></a></li>
+											<li id="li-step1"  ng-click="showSignup2()" ng-class="{active: signup2 == '1'}"><a id="1-step"></a></li>
+											<!--<li id="li-step2"><a id="2-step"></a></li>-->
+											<li id="li-step3"  ng-click="showSignup3()"  ng-class="{active: signup3 == '1'}"><a id="3-step"></a></li>
+										</ul>
+										<ul id="no-ny" ng-show="!signup4" class="signup-step hidden">
+											<li id="li-step4"><a id="4-step"></a></li>
+											<li id="li-step5" class="active"><a id="5-step"></a></li>
+											<li id="li-step6"><a id="6-step"></a></li>
+										</ul>
+									</div>
+
+									<div id="main-hidden1" class="col-md-7">
+									Qudos builds the best platform for our corporates to cater to their car service needs.
+									</div>
+									<div id="signup-1"  ng-show="signup1" style="position:relative; float:left; width:100%;" class="">
+										<div class="col-md-6">
+										<label>Which Country are you?</label>
+									
+										
+										 
+										 
+							
+										 <select  id="select-state"  ng-model="loginUser.country_id" ng-options="country.country_id as country.country_name for country in countries  track by country.country_id" ng-change="countryChanged()" class="select-state" name="country">
+										</select>
+							
+							
+						
+										
+											<div class="select-state-spot"></div>
+											<a id="first-step" ng-click="showSignup2()" class="submit" >Next</a>
+
+										</div>
+									</div>
+
+								   </div>
+								   <!--End Sign up Step 1-->
+
+
+								   <!--Start Sign up Step 2-->
+									<div id="signup-2" ng-show="!signup1&&signup2&&!signup3" class="row row-input ">
+
+
+
+										<div class="row row-input">
+											<div class="col-md-6">
+											<label>Business Name</label>
+											<span class="icon_input_signup position-absolute"><img ng-src="img/user.png"></span>
+
+											<input required id="fname" class="user-input" ng-model="loginUser.first_name"  name="fname"  type="text" placeholder="Enter Business Name">
+											</div>
+
+											<div class="col-md-6">
+											<label>Business Entity</label>
+											<span class="icon_input_signup position-absolute"><img ng-src="img/user.png"></span>
+
+											<input id="lname" class="user-input" name="lname" ng-model="loginUser.last_name"  type="text" placeholder="LLC, Inc etc...">
+											</div>
+
+										</div>
+
+										<div class="row row-input">
+											<div class="col-md-6">
+											<label>Mobile Number</label>
+												<div class="row-input">
+												<input id="mobile" class="mobiled" type="tel"  ng-blur="getCountryandMobile()" onkeypress="return isNumberKey(event)" ng-model="loginUser.user_mobile"  inputmode="numeric" placeholder="Enter mobile number">
+												<span class="main-mobile hidden">+1-</span></span>
+												<input type="hidden" name="extTwo" id="extPopTwo">
+												</div>
+											</div>
+
+											<div class="col-md-6">
+											<label>Email Address</label>
+											<span class="icon_input_signup position-absolute"><img ng-src="img/mail.png"></span>
+
+											<input id="email" class="email-add"  ng-model="loginUser.user_email" name="lname"  type="text" placeholder="Enter your email">
+											</div>
+
+										</div>
+
+										<div class="row row-input">
+											<div class="col-md-6">
+												<label>Password</label>
+												<span class="icon_input_signup position-absolute"><img ng-src="img/key.png"></span>
+
+												<input required id="password"  ng-model="loginUser.password"class="user-input" name="password"  type="password" placeholder="Password">
+											</div>
+
+											<div class="col-md-6">
+												<label>Confirm Password</label>
+												<span class="icon_input_signup position-absolute"><img ng-src="img/key.png"></span>
+
+												<input id="passwordc" class="user-input"  ng-model="loginUser.confirm_password" name="passwordc"  type="password" placeholder="Confirm Password">
+											</div>
+
+										</div>
+
+										<div class="row row-input">
+										
+											
+											<div class="col-md-6">
+												<label>Select State</label>
+												 <select  id="my-state"  ng-model="loginUser.state_id" ng-options="state.state_id as state.state_name for state in states  track by state.state_id" ng-change="stateChanged()" class="select-state" name="state"></select>
+							
+											</div>
+											
+												<div class="col-md-6">
+												<label>Zip Code</label>
+											<span class="icon_input_signup position-absolute"><img ng-src="img/spot.png"></span>
+
+												<input  ng-model="loginUser.zip_code" id="zip" class="zip" type="text" maxlength="6" ng-change="checkZip()" ng-model-options="{ debounce: 200 }"  onkeypress="return isNumberKeys(event)" inputmode="numeric" placeholder="Your Area ZIP code">
+											</div>
+
+											
+										</div>
+										
+										<div class="row row-input">
+										
+									
+										
+									
+										
+										
+												<div class="col-md-6 but-next">
+												<button style="width: 250px;margin-bottom: 25px;" type="button" ng-disabled="onloadotp" ng-click="sendOtp()" class="loginButton submit">Send OTP</button>
+												
+												<p>Already have an account? <a ui-sref="corporate_login"><strong>Login</strong></a></p>
+												</div>
+												
+
+
+										</div>
+										<div ng-if="loadings" class="loaders"> <span><img src="app/img/ring-alt.svg"></span></div>
+									</div>
+								
+										
+							<div id="signup-3"  ng-show="!signup1&&!signup2&&signup3&&otpSent&&!otpVerified" class="row row-input  ">
+
+
+
+								<div class="col-md-6 top-margin">
+								<p><strong>Confirm your Mobile Number</strong></p>
+								<label>Enter OTP sent to your Mobile number</label>
+								<input type="text" id="otp" ng-model="otp" name="verify-phone"  onkeypress="return isNumberKeys(event)" class="phone-verify" placeholder="0000" maxlength="4"  inputmode="numeric">
+
+									<div class="row row-input a-color">
+										<div class="col-xs-5"><button class="btn-links" id="resendOtp" ng-disabled="DisableResnd" ng-class="{regenerateOTP: addInviteesDisabled()}"  ng-click="regenerateOTP()" href="javascript:void(0)">Resend OTP</button></div>
+										<div class="col-xs-7"><a id="changeMobile"  ng-click="showSignup2()" href="javascript:void(0)">Change Mobile number</a></div>
+									</div>
+
+								 <div class="row row-input top-margin">
+								<button id="fourth-step" ng-disabled="DisableCCA" ng-click="verifyOTP();" class="submit" >Create Corporate Account</button>
+								
+								</div>
+
+								<div class="row row-input top-margin a-color">
+								<p>Already have an account? <a ui-sref="corporate_login" ><strong>Login</strong></a></p>
+								</div>
+
+
+								</div>
+								<div ng-if="loadings" class="loaders"> <span><img src="app/img/ring-alt.svg"></span></div>
+
+							</div>
+                       <!--End Sign Up Step 4-->
+
+                     
+								   
+											
+							 
+							</div>
+							
+						</div>
+					
+									
+							
+								
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+					
+
+</section>
+
+<script>
+$(document).ready(function() {
+	$('body').addClass('login-page');
+    manageResolution();
+});
+$(window).resize(function() {
+    manageResolution();
+});
+
+function manageResolution() {
+    var divHeight = $(".loginInnerDiv").height();
+    var windowHeight = $(window).height();
+    var outerDivWidth = $(".loginOuterDiv").width();
+    var innerDivWidth = $(".loginInnerDiv").width();
+    var windowWidth = $(window).width();
+    if (windowHeight > 720) $(".loginSignupPage").css("height", windowHeight);
+    $(".loginSignupPage").css("height", "100%");
+    //$(".loginSignupPage").css("height",windowHeight);
+    //console.log(divHeight,windowHeight,outerDivWidth,innerDivWidth,windowWidth);
+    var paddingToGive = 15;
+    if (windowHeight > divHeight) {
+        paddingToGive = (windowHeight - divHeight) / 2;
+    }
+    if (paddingToGive > 40) {
+        //$(".loginInnerDiv").css({'padding-top':paddingToGive,'padding-bottom':paddingToGive});
+    } else {
+        $(".loginInnerDiv").css({
+            'padding-top': 15,
+            'padding-bottom': 15
+        });
+    }
+    //console.log("paddingToGive",paddingToGive);
+    if (windowWidth < 420) {
+        // $(".loginOuterDiv").width(windowWidth).css('margin',0);
+
+    } else {
+        //$(".loginOuterDiv").css('margin-left','30%').width('%');
+    }
+    if (innerDivWidth < 250) {
+        $(".loginInnerDiv").css({
+            'padding-left': 0,
+            'padding-right': 0
+        });
+    }
+    //console.log($('.loginButtonDiv button').width(),$('.loginButtonDiv').width());
+    if ($('.loginButtonDiv button').width() > $('.loginButtonDiv').width()) {
+        //$('.loginButtonDiv button').width($('.loginButtonDiv').width())
+    } else {
+        //$('.loginButtonDiv button').width($('.loginButtonDiv').width())
+    }
+}
+    var images = new Array()
+
+    function preload() {
+        for (var i = 0; i < preload.arguments.length; i++) {
+            images[i] = new Image();
+            images[i].src = preload.arguments[i]
+        }
+    }
+    $(document).ready(function() {
+    /*  $("#phone").intlTelInput({
+            // initialCountry: 'us'
+            initialCountry: "auto",
+              geoIpLookup: function(callback) {
+                $.get('http://ipinfo.io', function() {}, "jsonp").always(function(resp) {
+                  var countryCode = (resp && resp.country) ? resp.country : "";
+                  // console.log(countryCode);
+                  // console.log(resp.country);
+                  callback(countryCode);
+                });
+              },
+              utilsScript: "../../build/js/utils.js",
+              autoPlaceholder:"off"
+        });
+        if($('#Two').val()==''){
+          console.log($('#Two').val());
+          if(localStorage.getItem("countryCode"))var c=localStorage.getItem("countryCode");
+          $('#Two').val('+'+c);
+        }
+        // $('#extTwo').val('+1');
+        $("#phone").on("countrychange", function(e, countryData) {
+
+            $('#Two').val('+' + countryData.dialCode); // do something with countryData
+            localStorage.setItem("countryCode",countryData.dialCode); // do something with countryData
+        });
+        $("#promoPhoneTwo").intlTelInput({
+            // initialCountry: 'us'
+            initialCountry: "auto",
+              geoIpLookup: function(callback) {
+                $.get('http://ipinfo.io', function() {}, "jsonp").always(function(resp) {
+                  var countryCode = (resp && resp.country) ? resp.country : "";
+                  callback(countryCode);
+                });
+              },
+              utilsScript: "build/js/utils.js",
+              autoPlaceholder:"off"
+        });
+        if($('#extPopTwo').val()==''){
+          console.log($('#extPopTwo').val());
+          if(localStorage.getItem("countryCode"))var c=localStorage.getItem("countryCode");
+          $('#extPopTwo').val('+'+c);
+        }
+        // $('#extPopTwo').val('+1');
+        $("#promoPhoneTwo").on("countrychange", function(e, countryData) {
+            //            console.log("countryData", countryData);
+            $('#extPopTwo').val('+' + countryData.dialCode); // do something with countryData
+            localStorage.setItem("countryCode",countryData.dialCode); // do something with countryData
+        });
+		
+		
+		*/
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		$('#mobile').focus();
+		$('#extPopTwo').val('+1');
+		$("#mobile").intlTelInput({
+			initialCountry: 'us',
+			autoPlaceholder:"off"
+        });
+		
+		 $("#mobile").on("countrychange", function(e, countryData) {         
+            $('#extPopTwo').val('+' + countryData.dialCode); // do something with countryData
+            localStorage.setItem("countryCode",countryData.dialCode); // do something with countryData
+        });
+		
+		
+		
+		
+		
+		
+		function isNumberKey(evt)
+			{
+				var charCode = (evt.which) ? evt.which : event.keyCode;
+				 //console.log(charCode);
+					
+					if (charCode == 43) return true;
+					
+					if  (charCode < 48 || charCode > 57)
+					 return false;
+		
+				  return true;
+			}
+		
+			function isNumberKeys(evt)
+			{
+				var charCode = (evt.which) ? evt.which : event.keyCode;
+				 //console.log(charCode);
+					
+					
+					
+					if  (charCode < 48 || charCode > 57)
+					 return false;
+		
+				  return true;
+			}
+		
+		
+    });
+</script>

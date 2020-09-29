@@ -1,0 +1,171 @@
+ <div class="container page" id="Trips">
+      <div class="page-header" id="banner">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12">
+			  <div class="row">
+				
+					<div class="col-md-10">
+						<a class="btn btn-outline-primary btn-md tripsbtn active-page" data-hover="images/caricongrey.png"  data-unhover="images/caricon.png" style="float:left; margin-right:20px;" ui-sref="corporate.listCards" id="drivertripsbtnicon">My Cards<img src="images/document1.png" style="padding-left:10px;" id="drivercariconbtn"></a>
+						
+						<a class="btn btn-outline-primary btn-md tripsbtn " ng-if="driverDetails.subtype_id == 1"  data-hover="images/caricongrey.png"  data-unhover="images/caricon.png" style="float:left; margin-right:20px;" ui-sref="corporate.bankDetails" id="drivertripsbtnicon">Bank Details<img src="images/document1.png" style="padding-left:10px;" id="drivercariconbtn"></a>
+						<a class="btn btn-outline-primary btn-md tripsbtn " data-hover="images/caricongrey.png"  data-unhover="images/caricon.png" style="float:left; margin-right:20px;" ui-sref="corporate.documents" id="drivertripsbtnicon">My Documents<img src="images/document1.png" style="padding-left:10px;" id="drivercariconbtn"></a>
+						
+						<a class="btn btn-outline-primary btn-md tripsbtn " data-hover="images/caricongrey.png"  data-unhover="images/caricon.png" style="float:left; margin-right:20px;" ui-sref="corporate.staff" id="drivertripsbtnicon">My Staff<img src="images/document1.png" style="padding-left:10px;" id="drivercariconbtn"></a>
+						
+						<a class="btn btn-outline-primary btn-md tripsbtn " style="float:left; margin-right:20px;" ui-sref="corporate.paymentSettings" id="drivertripsbtnicon">More <i style=" font-size: 21px;    vertical-align: middle;    margin-left: 5px;" class="fa fa-cog"></i></a>
+						
+					</div>
+					
+					<div class="col-md-2 pull-right">
+					    <button class="btn btn-outline-primary btn-md tripsbtn adddocbtn" data-toggle="modal" data-target="#add_to_account" >Add Card</button>
+					</div>
+					
+				
+				
+				
+			  </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tables
+      ================================================== -->
+        <div class="row">
+			<div class="col-lg-12">
+		  
+		  
+            <div class="page-header">
+            </div>
+              <table class="table table-responsive trips desktop">
+                <thead>
+                  <tr class="frow">
+                    <th scope="col">ID </th>
+                    <th scope="col">Card Type</th>
+					<th scope="col">Card Number</th>
+                    <th scope="col">Default</th>
+                    <th scope="col">Added On</th> 
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody ng-if="Users.length > 0">
+				
+				
+                  <tr ng-repeat="doc in Users | orderBy : '-id' track by $index" >
+                    <td>{{doc.id}}</td>
+                    <td>{{doc.card_type}}</td>
+                    <td>{{doc.last4_digits}}</td>
+                    <td><button href="javascript:;" ng-disabled="onLoad"  ng-click="(!doc.default_card) ? setDefaultCard(doc.id) : doNothing() " class="callToAction buttonlink" ng-class="{disabled : (doc.default_card==1)}">Make it Default</button></td>
+					<td>{{doc.card_added_on |date:'MM/dd/yyyy ' }}</td>
+                    <td><a href="javascript:;" class="callToAction" ng-click="deleteCard(doc)">Delete</a></td>
+                  </tr>
+                </tbody>
+                <tbody ng-if="Users.length == 0">
+                        <tr>
+                            <td colspan="6" class="text-center">No Card Found</td>
+                        </tr>
+                    </tbody>
+              </table>
+
+			</div>
+        </div>
+    </div>
+
+	
+	
+		<div class="modal fade" id="add_to_account" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+         
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="row modaltitle">
+                    <div class="col-sm-11 col-12">
+                      <button type="button" class="close" data-dismiss="modal" style="font-size:32px;float:right;padding:5px;">&times;</button>
+                      <h5 id="mtitle" style="text-align: center;">Add Card </h5>
+                    </div>
+                    
+                  </div>
+                  <div class="modal-body modal-lg">
+				  
+				   <div class="col-sm-12">
+					
+					<form enctype="multipart/form-data" action="#" method="post"  name="myForm" id="payment-form">
+						<div class="row modalrow">
+							<div class="col-sm-12 text-center">
+							              
+								<div id="card-element"><!-- A Stripe Element will be inserted here. --></div>
+							
+								
+							</div>	
+							<div class="col-sm-12 text-center ">		
+								<!-- Used to display Element errors. -->
+								<div id="card-errors" role="alert"></div>					
+							</div>	   
+						</div>	   
+						<div class="row">
+							<div class="col-sm-12 addbtn">
+								<div class="btn-align" >
+								<button type="submit" ng-disabled="OnloadDisable" class="button submit btn btn-primary btn-md">Save Card</button>
+								</div>
+							</div>
+						</div>
+					</form>
+
+					
+					</div>
+                  </div>
+                </div>
+              </div>
+		</div>
+
+			<div class="modal fade" id="show_cardError" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+					<div class="modal-content">
+					 <div class="row modaltitle">
+						<div class="col-sm-11 col-12">
+						  <button type="button" class="close"  ng-click="closeCard()" data-dismiss="modal" style="font-size:32px;float:right;padding:5px;">&times;</button>						  
+						</div>
+					  </div>
+				  
+						<div class="modal-body ">
+									<div class="panel-body confirm-body" ng-show="cardAlert">
+										<div class="col-sm-12 row text-center">
+											
+											<p>Please add new card before deletion of last card can proceed.</p>
+											<hr class="confirm">
+											<div class="col-md-3"></div>
+											<div class="col-md-3"><button data-dismiss="modal" ng-click="closeCard()"  class="btn btn-primary ride-confirm-btn ">Cancel</button></div>
+											<div class="col-md-3 text-center"><button data-toggle="modal" ng-click="closeCard()" data-target="#add_to_account" class="btn btn-primary ride-confirm-btn ">Yes, Add Card</button> </div>
+										</div>
+									</div>
+										
+						</div>
+					</div>
+				</div>
+			</div>
+					
+			
+
+<script>
+ $(document).on('show.bs.modal', '.modal', function (event) {
+            var zIndex = 1040 + (10 * $('.modal:visible').length);
+            $(this).css('z-index', zIndex);
+            setTimeout(function() {
+                $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+            }, 0);
+        });
+		
+		
+$('#mydocuploado').click(function() {
+    $('#afterbordero').css("cssText", "border:1px solid #1f8dc6!important;");
+});
+$('#mydocupload').click(function() {
+    $('#afterborder').css("cssText", "border:1px solid #1f8dc6!important;");
+});
+
+$('#date').combodate({
+    firstItem: 'name', 
+});    
+$('#edate').combodate({
+    firstItem: 'name', 
+});    
+
+</script>

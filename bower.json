@@ -1,0 +1,21 @@
+{
+  "name": "driver_rider_portal_new",
+  "authors": [
+    "karki93pankaj <pankaj.karki@tothenew.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-page-loader": "*",
+    "ng-webcam": "^0.4.1"
+  }
+}

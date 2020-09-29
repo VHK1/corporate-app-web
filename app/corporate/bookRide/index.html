@@ -1,0 +1,1310 @@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<style>
+
+.col-md-5.d-image {
+    min-height: 100%;
+    min-height: 151px;
+    max-height: 100%;
+    max-width: 151px;
+    height: auto;
+    width: 151px;
+	
+}
+
+div.d-image img.circle-img{
+    max-width: 90%;
+
+    min-height: auto;
+}
+span.request-now-text {
+    margin: 0 auto;
+    margin-bottom: 22px;
+    font-size: 23px;
+}
+
+.myautocomplete{
+	padding: 5px 0;
+    position: absolute;
+    z-index: 99999;
+    top: 33%;
+    background: white;
+    left: 23.5%;
+    border: 1px solid #eee;
+    /*max-height: 239px;
+    overflow: scroll;
+    overflow-x: hidden;*/
+    min-width: 271px;
+}
+
+
+.bordr {
+    border-bottom: 1px solid #ccc;
+    margin-top: 13px;
+    margin-bottom: 0;
+}
+
+span.bordrOr {
+    position: relative;
+    bottom: 17px;
+    background: #fff;
+    padding: 0 5px;
+	color:#aaa;
+	font-size:11px;
+}
+.closeAutocomplete{
+	cursor:pointer;
+}
+.closeAutocomplete:hover{
+	background-color:#fdfdfd;
+}
+
+
+@media screen and (max-width:1900px )
+{
+	.myautocomplete{
+		left: 20.5%;
+		top: 32%;
+	}
+}
+@media screen and (max-width:1800px )
+{
+	.myautocomplete{
+		left: 18.3%;
+		top: 32%;
+	}
+}
+@media screen and (max-width:1600px )
+{
+	.myautocomplete{
+		left: 18%;
+		top: 32%;
+	}
+}
+
+@media screen and (max-width:1600px )
+{
+	.myautocomplete{
+		left: 15%;
+		top: 32%;
+	}
+}
+
+@media screen and (max-width:1366px )
+{
+	.myautocomplete{
+		left: 10%;
+		top: 32%;
+	}
+}
+
+@media screen and (max-width:1250px )
+{
+	.myautocomplete{
+		left: 7%;
+		top: 32%;
+	}
+}@media screen and (max-width:1100px )
+{
+	.myautocomplete{
+		left: 8%;
+		top: 32%;
+	}
+}
+@media screen and (max-width:991px )
+{
+	.myautocomplete{
+		left: 23.5%;
+	}
+}
+
+@media screen and (max-width:768px )
+{
+	.myautocomplete{
+		left: 23.5%;
+	}
+}
+
+
+input[type=checkbox] { 
+	-webkit-appearance: checkbox;
+}
+input[type=radio] {
+    -webkit-appearance: radio;
+}
+input.user-input {
+    background: url(../img/user.png) 11px 15px no-repeat;   
+    padding-left:40px;
+}
+
+
+
+
+
+
+.row.ride-later {
+    margin: 0 auto;
+}
+@media (min-width: 992px) {
+  .modal-xl {
+    max-width: 1024px;
+  }
+}
+
+
+
+
+
+.radiobox {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.radiobox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 25px;
+	width: 25px;
+	background-color: #eee;
+	border:2px solid #b9b8b8;
+	border-radius: 5px;
+}
+
+.radiobox:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.radiobox input:checked ~ .checkmark {
+  background-color: #17598e;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.radiobox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.radiobox .checkmark:after {
+ 	top: 9px;
+	left: 9px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+
+}
+
+
+
+</style>
+<!-- Page Content -->
+    <div class="container " id="Trips">
+
+      <div class="row">
+
+	 
+					
+					
+					
+					
+        <div class="col-lg-3">
+			<div class="page">
+				 <h1 class="my-4">Trip Details</h1>
+				  <div class="row">
+						<div class="col-md-12 ui-widget">
+							<label>Name</label>
+							<input id="userName"  ng-model="booking.user_name" ng-change="getNewUsers(1)" ng-blur="closeAC()" class="form-control autocompleteClass user-input" placeholder="Enter Name"/>
+						
+						</div>
+					
+
+						<div class="col-md-10 text-center" style="height: 20px; margin:0 auto">
+							<div class="bordr"></div>
+							<span class="bordrOr">OR</span>
+						</div>
+						<div class="col-md-12">
+							<label>Mobile</label>
+							<input id="phone"  ng-model="booking.user_mobile" ng-change="showDirection(1)"  class="form-control" placeholder="Enter Mobile"/>
+							<input id="extPopTwo" type="hidden"  ng-model="booking.countryCodeText" ng-change="showDirection(1)" class="hidden"/>
+						</div>
+						
+						<div class="col-md-12">
+							<label>Pickup Location</label>
+							<input id="pickup" class="form-control autocomplete" ng-model="booking.pickup_text" ng-change="showDirection(1)" ng-blur="findPlace('pickup')"  placeholder="Enter pickup location"/>
+						</div>
+						
+						<div class="col-md-12">
+							<label>Drop off Location</label>
+							<input  id="drop" class="form-control autocomplete" ng-model="booking.drop_text"  ng-change="showDirection(1)" ng-blur="findPlace('drop')"  placeholder="Enter drop off location"/>
+						</div>
+						
+						<div class="col-md-12 mt-5">
+							<a href="javascript:;" ng-show="DirectionShow" ng-click="getFareEstimate()" class="bookRideButton pull-right animate-show greyShadow" ng-cloak>New Ride Request</a>
+						</div>
+						
+						
+				  </div>
+			</div>
+        </div>
+        <!-- /.col-lg-3 -->
+
+        <div class="col-lg-9 page">
+			<div class="row bottom-20">
+				<div class="col-md-3 text-left booking-step pl-4">					
+					<a href="javascript:;" ng-click="showDirection()"  ng-class="{inactive : DirectionShow == 0 }" class="callToAction">Direction</a> 
+				</div>
+				<div class="col-md-3 text-center booking-step">
+					<a href="javascript:;" ng-click="(!force) ? showCar() : donothing()" ng-class="{inactive : CarShow == 0 }" class="callToAction">Car Class</a> 
+				</div>
+				<div class="col-md-3 text-center booking-step no-after">
+					<a href="javascript:;" ng-click="(!force) ? showUser() : donothing()"  ng-class="{inactive : UserShow == 0 }" class="callToAction">QudosFave™</a>
+				</div>
+				<div class="col-md-3 text-center ">
+					<a href="javascript:;" ng-show="DirectionShow" ng-click="getFareEstimate()" class="bookRideButton pull-right animate-show greyShadow hidden" ng-cloak>New Ride Request</a>
+					
+					<a href="javascript:;" ng-click="validateDateTime()" class="bookRideButton pull-right animate-show greyShadow hidden" ng-cloak>Time check</a>
+					<a href="javascript:;" ng-click="getHour()" class="bookRideButton pull-right animate-show greyShadow hidden" ng-cloak>Set Time </a>
+					
+					
+					<a href="javascript:;" ng-show="CarShow" ng-click="showDirection()" class="bookRideButton pull-right animate-show greyShadow greyBtn" ng-cloak>Back</a>
+					
+					<a href="javascript:;" ng-show="CarShow" ng-if="booking.car_selected ==1" ng-class="{greyBtn : (booking.car_selected !=1)}" ng-click="selectCarClassNext()" class="bookRideButton pull-right animate-show greyShadow hidden" ng-cloak>Next</a>
+					
+					<a href="javascript:;" ng-show="UserShow"  ng-click="showCar()"  class="bookRideButton pull-right animate-show greyShadow greyBtn" ng-cloak>Back</a>
+					
+					<a href="javascript:;" ng-show="UserShow" ng-if="booking.driver_selected ==1" ng-class="{greyBtn : (booking.driver_selected !=1)}" ng-click="slectNext()"  class="bookRideButton pull-right animate-show greyShadow hidden" ng-cloak>Next</a>
+				</div>
+			</div>
+			<div class="row animate-show" ng-show="DirectionShow">
+				<div class="col-md-12 card-outline-secondary my-4" >				
+					<div id="map" style="width: 100%; height: 400px; float: left;"></div> 
+					<div id="panel" style="width: 300px; float: right; display:none"></div> 			 
+				 
+				</div>
+			</div>
+			
+			<div class="row animate-show" ng-show="CarShow">
+				<div class="col-md-12 " >
+					<div ng-repeat="car in cars_option | orderBy:sorterFunc:reverse  track by $index" ng-class="($index==0) ? 'mt-4':'mt-60'" class="col-md-12 car-card  " >
+						<h3>{{car.carClass}}: {{car.car_name}}</h3>
+						<span class="car-info">{{car.similar}}</span>
+						<span class="car-cancarry"><i class="fa fa-users"></i> <span>Max {{car.max}}</span> | <i class="fa fa-suitcase"></i> <span>Max {{car.luggage}}</span></span>
+						<hr>
+						<div class=" row">
+							
+							<div class="col-md-4">
+								<p class="car-features">
+									<span><i class="fa far fa-clock"></i> Free 30 mins wait time for airport pickups, 5 mins for all others</span>
+									<span><i class="fa far fa-smile"></i> Includes meet and greet</span>
+									<span><i class="fa far fa-times-circle"></i> Free Cancellation up to 6 hour before pickup </span>
+								</p>
+							</div>
+							<div  class="col-md-5">
+								<img class="card-img-top img-fluid"  ng-src="{{car.car_image}}" alt="">
+							</div>
+							
+							<div class="col-md-3 text-center car-price">						  
+								  <h2>${{car.value_regular | number}}</h2>
+								 <h5 class="tax-info">All prices include tax, Fees & Tip</h5>
+								 
+								 <button class="car-select-btn" ng-show="booking.car_type != car.car_type"  ng-click="selectCarClass(car.car_type,car.value_regular,car.value_scheduled)">Select</button>
+								 
+								 <button class="car-select-btn selectedCar" ng-show="booking.car_type == car.car_type"  ng-click="selectCarClass(car.car_type,car.value_regular,car.value_scheduled)"><i class="fa fa-check"></i> Selected</button>
+								 
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+          <!-- /.card -->
+			
+			
+			<div class="row animate-show" ng-show="UserShow">
+				<div class="col-md-12 card-outline-secondary my-4" >
+				
+					<a class="btn btn-outline-primary btn-md tripsbtn ipad-btn" ng-click="switchMode('m')" style="float:left; margin-right:20px;" ng-class="{'active-page':(myQudosMode==1)}" id="drivertripsbtnicon">My QudosFave™</a>
+					  
+					<a class="btn btn-outline-primary btn-md tripsbtn ipad-btn"  ng-click="switchMode('u')"  style="float:left; margin-right:20px;" ng-class="{'active-page':(UserQudosMode==1)}">User QudosFave™</a>
+					
+					<a class="btn btn-outline-primary btn-md tripsbtn ipad-btn"  ng-click="switchMode('a')"  style="float:left;" ng-class="{'active-page':(AllQudosMode==1)}">QudosFave™ list</a>
+					
+					<div class="col-md-4 inputserch">
+						<span class="search-icon serchfield-icon"><i class="fa fa-search"></i></span>
+						<input type="text" placeholder="Search name, car, affiliate" ng-show="myQudosMode" ng-model-options="{ debounce: 200 }" class="input form-control field search-ng serchfield" ng-model="searchmyuser"/>
+						<input type="text" placeholder="Search name, car, affiliate" ng-show="UserQudosMode" ng-model-options="{ debounce: 200 }" class="input form-control field search-ng serchfield" ng-model="searchlistuser"/>
+						<input type="text" placeholder="Search name, car, affiliate" ng-show="AllQudosMode" ng-model-options="{ debounce: 200 }" class="input form-control field search-ng serchfield" ng-model="searchalluser"/>
+					</div>
+				</div>
+				
+				<div class=" col-md-12 card-outline-secondary my-4"  ng-show="myQudosMode" >				
+					<div  class="col-md-12 text-center" ng-show="corporateFavDriver.length==0" >					
+						<h3>No Driver Found</h3>
+					</div>
+					<div class="row col-md-12 "  >		
+					
+						<div  class="col-md-6 user-card-div "  ng-repeat="carToSelect in cars_option | orderBy:sorterFunc:reverse  track by $index" ng-class="{'hidden' : booking.car_type != carToSelect.car_type}" >
+							<div class="row user-card col-md-12">
+								<div  class="col-md-5 d-image">
+								  <img class="circle-img" ng-src="{{carToSelect.car_image}}"/>
+								</div>
+								<div class="col-md-7">
+									<h5>{{carToSelect.car_name}}, Select</h5>
+									<span class="driver-car">{{carToSelect.similar}}  </span>
+								</div>
+								
+								<div class="col-md-12 text-right">								
+									<div>									
+										<button class="car-select-btn" ng-show="booking.select_car_type != carToSelect.car_type"  ng-click="slect(carToSelect.car_type,1)">Select</button>
+										<button class="car-select-btn selectedCar" ng-show="booking.select_car_type == carToSelect.car_type" ng-click="slect(carToSelect.car_type,1)"><i class="fa fa-check"></i> Selected</button>
+									</div>
+								</div>							
+							</div>					
+						</div>
+						
+						
+						
+						
+						
+						<div  class="col-md-6 user-card-div" ng-show="corporateFavDriver.length>=0" ng-repeat="driver in corporateFavDriver  | filter:searchmyuser track by $index" >
+							<div class="row user-card col-md-12">
+								<div ng-show="driver.driver_image" class="col-md-5">
+								  <img class="img img-responsive" ng-src="{{driver.driver_image}}"/>
+								</div>
+								<div class="col-md-7">
+									<h5>{{driver.driver_name}}</h5>
+									<span class="driver-car">{{driver.car_make}} {{driver.car_model}} <br>
+									{{driver.car_year}} {{driver.car_color}} </span>
+								</div>
+								
+								<div class="col-md-12 text-right">								
+									<div>									
+										<button class="car-select-btn" ng-show="booking.driver_id != driver.driver_id"  ng-click="slect(driver.driver_id)">Select</button>
+										<button class="car-select-btn selectedCar" ng-show="booking.driver_id == driver.driver_id"><i class="fa fa-check"></i> Selected</button>
+									</div>
+								</div>							
+							</div>					
+						</div>
+					</div>
+				</div>
+				
+				
+				<div class=" col-md-12 card-outline-secondary my-4"  ng-show="UserQudosMode"  >
+					<div  class="col-md-12 text-center" ng-show="userFavDriver.length==0" >
+					
+						<h3>No Driver Found</h3>
+					</div>
+					<div class="row col-md-12"  >		
+					
+					
+						<div  class="col-md-6 user-card-div "  ng-repeat="carToSelect in cars_option | orderBy:sorterFunc:reverse  track by $index" ng-class="{'hidden' : booking.car_type != carToSelect.car_type}" >
+							<div class="row user-card col-md-12">
+								<div  class="col-md-5 d-image">
+								  <img class="circle-img" ng-src="{{carToSelect.car_image}}"/>
+								</div>
+								<div class="col-md-7">
+									<h5>{{carToSelect.car_name}}, Select</h5>
+									<span class="driver-car">{{carToSelect.similar}}  </span>
+								</div>
+								
+								<div class="col-md-12 text-right">								
+									<div>									
+										<button class="car-select-btn" ng-show="booking.select_car_type != carToSelect.car_type"  ng-click="slect(carToSelect.car_type,1)">Select</button>
+										<button class="car-select-btn selectedCar" ng-show="booking.select_car_type == carToSelect.car_type" "slect(carToSelect.car_type,1)"><i class="fa fa-check"></i> Selected</button>
+									</div>
+								</div>							
+							</div>					
+						</div>
+						
+						
+						<div  class="col-md-6 user-card-div" ng-show="userFavDriver.length>0" ng-repeat="userDriver in userFavDriver | filter:searchlistuser  track by $index">
+							<div class="row user-card col-md-12">
+								<div ng-show="userDriver.driver_image" class="col-md-5">
+								  <img class="img img-responsive" ng-src="{{userDriver.driver_image}}"/>
+								</div>
+								<div class="col-md-7">
+									<h5>{{userDriver.driver_name}}</h5>
+									<span class="driver-car">{{userDriver.car_make}} {{userDriver.car_model}} <br>
+									{{userDriver.car_year}} {{userDriver.car_color}} </span>
+								</div>
+								
+								<div class="col-md-12 text-right">								
+									<div>									
+										<button class="car-select-btn" ng-show="booking.driver_id != userDriver.driver_id"  ng-click="slect(userDriver.driver_id)">Select</button>
+										<button class="car-select-btn selectedCar" ng-show="booking.driver_id == userDriver.driver_id" ng-click="slect(driver.driver_id)"><i class="fa fa-check"></i> Selected</button>
+									</div>
+								</div>							
+							</div>						
+						</div>		
+					</div>		
+				</div>
+				
+				
+				<div class=" col-md-12 card-outline-secondary my-4"  ng-show="AllQudosMode"  >
+					<div  class="col-md-12 text-center" ng-show="all_drivers.length==0" >
+					
+						<h3>No Driver Found</h3>
+					</div>
+					<div class="row col-md-12"  >	
+
+
+						<div  class="col-md-6 user-card-div "  ng-repeat="carToSelect in cars_option | orderBy:sorterFunc:reverse  track by $index" ng-class="{'hidden' : booking.car_type != carToSelect.car_type}" >
+							<div class="row user-card col-md-12">
+								<div  class="col-md-5 d-image">
+								  <img class="circle-img" ng-src="{{carToSelect.car_image}}"/>
+								</div>
+								<div class="col-md-7">
+									<h5>{{carToSelect.car_name}}, Select</h5>
+									<span class="driver-car">{{carToSelect.similar}}  </span>
+								</div>
+								
+								<div class="col-md-12 text-right">								
+									<div>									
+										<button class="car-select-btn" ng-show="booking.select_car_type != carToSelect.car_type"  ng-click="slect(carToSelect.car_type,1)">Select</button>
+										<button class="car-select-btn selectedCar" ng-show="booking.select_car_type == carToSelect.car_type"><i class="fa fa-check"></i> Selected</button>
+									</div>
+								</div>							
+							</div>					
+						</div>
+						
+						<div  class="col-md-6 user-card-div" ng-show="all_drivers.length>0" ng-repeat="driver in all_drivers | filter:searchalluser  track by $index">
+							<div class="row user-card col-md-12">
+								<div ng-show="driver.driver_image" class="col-md-5">
+								  <img class="img img-responsive" ng-src="{{driver.driver_image}}"/>
+								</div>
+								<div class="col-md-7">
+									<h5>{{driver.driver_name}}</h5>
+									<span class="driver-car">{{driver.car_make}} {{driver.car_model}} <br>
+									{{driver.car_year}} {{driver.car_color}} </span>
+								</div>
+								
+								<div class="col-md-12 text-right">								
+									<div>									
+										<button class="car-select-btn" ng-show="booking.driver_id != driver.driver_id"  ng-click="slect(driver.driver_id)">Select</button>
+										<button class="car-select-btn selectedCar" ng-show="booking.driver_id == driver.driver_id" ng-click="slect(driver.driver_id)"><i class="fa fa-check"></i> Selected</button>
+									</div>
+								</div>							
+							</div>						
+						</div>		
+						
+					</div>		
+				</div>
+				
+          <!-- /.card -->
+
+        </div>
+        <!-- /.col-lg-9 -->
+
+      </div>
+
+    </div>
+</div>
+    <!-- /.container -->
+	
+	
+	
+	<div class="myautocomplete page" ng-class="{hidden : closeAutocomplete == 1 }" >
+			<ul style="    list-style: none;    padding: 10px 10px 0 20px;">
+				<li ng-repeat="user in Users" style="padding: 5px 0;" data-id="{{user.user_id}}" data-number="{{user.user_mobile}}" class="closeAutocomplete" ng-click="selectThisUser(user.user_id,user.user_mobile,user.user_name)" ><span class="search_name">{{user.user_name}} </span> &nbsp; <span  class="search_mobile"> {{user.user_mobile}}</span></li>
+				<li ng-if="Users.length==0" class="text-center mt-3">No User Found...</li>				
+			</ul>
+			<hr style="padding: 2px;    margin: 0 15px 15px;">
+			<div class="text-center mb-4 mt-3">
+			<button class="btn btn-outline-primary btn-md tripsbtn adddocbtn button-black" style="float: none;" ng-click="openAddUser()" >Signup New User</button></div>
+		</div>
+		
+		
+			<div ng-show ="showLoader" class="overlay-loader"><div style="width:100%;height:100%" class="lds-rolling "><div></div></div></div>
+	
+	
+	
+
+		<div class="modal fade" id="add_to_account" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-body ">
+							
+							
+						<div class="panel-body" ng-show="(booking.manual_destination_address!='')">
+                          <div class="row">
+                            <div class="col-sm-1"></div>
+                              <div class="col-sm-5 smallfare">
+                                  <i class="fa fa-bookmark" style="color:#1f8dc6; font-size: 16px;"></i> &nbsp;<span style="color:#1f8dc6; font-size: 15px;font-weight: 500;">Fare</span>
+									  <div class="row">
+										  <div class="col-sm-6">
+											<h2 style="color:#555;text-shadow:none;font-weight:bold; ">${{booking.estimated_fare_later}}</h2>
+											<p class="">Book Later</p>
+										  </div>
+										   <div class="col-sm-6">
+											<h2 style="color:#555;text-shadow:none;font-weight:bold; ">${{booking.estimated_fare}}</h2>
+											<p class="">Request Now</p>
+											</div>
+										</div>
+                                  <p style="font-size: 14px;">{{booking.timeInThatArea|date: 'EEEE, MMMM d, y hh:mm a'}}</p>
+                                 
+                                  <hr>
+                                  <img src="images/cariconblue.png" class="smfcar"> &nbsp;<span style="color:#1f8dc6; font-size: 14px;font-weight: 500; float: left;">Trip details</span>
+                                    <ul class="triptime mytripspage">
+                                        <li>
+                                          <p>
+                                            <b>{{booking.timeInThatArea|date: 'd MMMM, y hh:mm a'}}</b><br>
+                                            {{booking.pickup_location_address}}
+                                          </p>
+                                              <div class="verticalLine"></div>
+                                        </li>
+                                        <li>
+                                          <p>
+                                            <b></b><br>
+                                            {{booking.manual_destination_address}}
+                                          </p>
+                                        </li>
+                                    </ul>
+                                  <hr>
+                                
+                                   
+								  <button class="btn btn-primary btn-sm rreceipt bookButton" data-target="#request_ride_later" ng-click="timeScheduler()" data-toggle="modal"  >Book Later</button> 
+								  <button class="btn btn-primary btn-sm rreceipt bookButton button-green" ng-click="timeSelected('now')"   >Request Now</button> 
+                                  <button data-dismiss="modal" ng-click="cancelAndUnselect()" class="btn btn-primary btn-sm viewbtn">Cancel</button>
+                              </div>
+                              <div  class="col-sm-6 smallmap">
+                                   <img class="img-responsive" ng-src="{{booking.route_directions}}" alt="Route"/>
+                              </div>
+                             
+                            </div>
+						</div>
+					
+                </div>
+              </div>
+            </div>
+		</div>
+	
+		<div class="modal fade" id="request_ride_later" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+				<div class="modal-content">
+				
+					 <div class="">
+						<div class="col-sm-12">
+						  <button type="button" class="close" data-dismiss="modal" ng-click="closePayment()" style="font-size:32px;float:right;padding:5px;">&times;</button>
+						
+						</div>
+						
+					  </div>
+				  
+				  
+					<div class="modal-body ">
+						<div class="panel-body y">
+							<div class="col-sm-12 row  ride-later " ng-show="stepTimeSelector">
+							
+							
+							
+									
+								<div class="col-md-6">
+									<label>Pickup Date</label>
+									<input readonly class="form-control"   ng-model="booking.date" id="date" placeholder="DD - MM - YYYY"/>
+								</div>
+								
+								<div class="col-md-6">
+									
+										<div class="form-group row row-input">
+											<div class="col-md-8 row ipad-hour">
+												<label>Pickup Hour</label>
+													
+											
+												<select  name="time" ng-model="booking.time_hour" class="form-control" id="time">
+													<option value="00">00 (12 AM)</option>
+													<option value="01">01 (1 AM)</option>
+													<option value="02">02 (2 AM)</option>
+													<option value="03">03 (3 AM)</option>
+													<option value="04">04 (4 AM)</option>
+													<option value="05">05 (5 AM)</option>
+													<option value="06">06 (6 AM)</option>
+													<option value="07">07 (7 AM)</option>
+													<option value="08">08 (8 AM)</option>
+													<option value="09">09 (9 AM)</option>
+													<option value="10">10 (10 AM)</option>
+													<option value="11">11 (11 AM)</option>
+													<option value="12">12 (12 PM)</option>
+													<option value="13">13 (01 PM)</option>
+													<option value="14">14 (02 PM)</option>
+													<option value="15">15 (03 PM)</option>
+													<option value="16">16 (04 PM)</option>
+													<option value="17">17 (05 PM)</option>
+													<option value="18">18 (06 PM)</option>
+													<option value="19">19 (07 PM)</option>
+													<option value="20">20 (08 PM)</option>
+													<option value="21">21 (09 PM)</option>
+													<option value="22">22 (10 PM)</option>
+													<option value="23">23 (11 PM)</option>
+												</select>
+											</div>  
+											<div class="col-sm-5 no-left ipad-minutes">
+												<label>Minute</label>   
+												<select name="time"  ng-model="booking.time_minutes" class="form-control" id="time-min">
+													<option value="00">00</option>
+													<option value="05">05</option>
+													<option value="10">10</option>
+													<option value="15">15</option>
+													<option value="20">20</option>
+													<option value="25">25</option>
+													<option value="30">30</option>
+													<option value="35">35</option>
+													<option value="40">40</option>
+													<option value="45">45</option>
+													<option value="50">50</option>
+													<option value="55">55</option>
+												</select>
+											</div> 
+										</div> 
+														
+														
+								</div>
+								
+									
+								<hr class="confirm">
+								<div class="col-md-4"></div>
+								<div class="col-md-4 mt-2 mb-4 text-center"><button ng-click="timeSelected()" class="btn btn-primary ride-confirm-btn button-black">Book the Ride</button> </div>
+							</div>
+						
+							
+						
+						</div>
+									
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal fade" id="payment_step" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+				<div class="modal-content">
+				
+					 <div class="">
+						<div class="col-sm-12">
+						  <button type="button" class="close" data-dismiss="modal" ng-click="closePayment()" style="font-size:32px;float:right;padding:5px;">&times;</button>
+						
+						</div>
+						
+					  </div>
+				  
+				  
+					<div class="modal-body ">
+						<div class="panel-body y">
+							<div class="col-sm-12 row  ride-later " >
+								<div class="col-md-12 text-center">
+								<h2>Choose Payment Method</h2>
+								</div>
+							
+									
+								<div class="col-md-6">
+									
+									<label class="radiobox">Corporate Card 
+									  <input type="radio" checked="checked" ng-checked="true" ng-click="showCardList()"  ng-model="booking.cardSelected" value="corporate"/>
+									  <span class="checkmark"></span>
+									</label>
+								</div>
+								<div class="col-md-6">
+								
+									<label class="radiobox">Rider Card 
+									  <input type="radio" ng-click="showCardList()"  ng-model="booking.cardSelected" value="rider"/>
+									  <span class="checkmark"></span>
+									</label>
+								</div>
+								
+								<div class="col-lg-12" ng-show="corporateCards">
+		  
+							  
+									<div class="page-header">
+										</div>
+									<table class="table table-responsive trips shrinked ">
+										<thead>
+											  <tr class="frow">
+												<th scope="col">ID </th>
+												<th scope="col">Card Type</th>
+												<th scope="col">Card Number</th>
+												<th scope="col">Default</th>
+												<th scope="col">Added On</th>
+												<th scope="col">Action</th>
+											  </tr>
+										</thead>
+										<tbody ng-if="Cards.length > 0">
+											
+											
+											  <tr ng-repeat="card in Cards track by $index" >
+												<td>{{card.id}}</td>
+												<td>{{card.card_type}}</td>
+												<td>{{card.last4_digits}}</td>
+												<td><a href="javascript:;" ng-click="(!card.default_card) ? setDefaultCard(card.id) : doNothing() " class="callToAction" ng-class="{disabled : (card.default_card==1)}" ng-disabled="card.default_card">Make it Default</a></td>
+												<td>{{card.card_added_on}}</td>
+												<td>
+													<label class="radiobox">
+													  <input type="radio" ng-checked="{{card.default_card ? 1 : 0}}" {{card.default_card ? checked : ''}} ng-value="card.id" value="{{card.id}}" ng-model="booking.cardIdCorporate" />
+													  <span class="checkmark"></span>
+													</label>
+												</td>
+											  </tr>
+										</tbody>
+										<tbody ng-if="Cards.length == 0">
+											<tr>
+												<td colspan="6" class="text-center">No Card Found</td>
+											</tr>
+										</tbody>
+									</table>
+
+								</div>
+								<div class="col-lg-12" ng-show="riderCards">
+		  
+							  
+									<div class="page-header">
+										</div>
+									<table class="table table-responsive trips shrinked ">
+										<thead>
+											  <tr class="frow">
+												<th scope="col">ID </th>
+												<th scope="col">Card Type</th>
+												<th scope="col">Card Number</th>
+												<th scope="col">Default</th>
+												<th scope="col">Added On</th>
+												<th scope="col">Action</th>
+											  </tr>
+										</thead>
+										<tbody ng-if="RiderCards.length > 0">
+											
+											
+											  <tr ng-repeat="card in RiderCards track by $index" >
+												<td>{{card.id}}</td>
+												<td>{{card.card_type}}</td>
+												<td>{{card.last4_digits}}</td>
+												<td><a href="javascript:;" ng-click="(!card.default_card) ? setDefaultCard(card.id) : doNothing() " class="callToAction" ng-class="{disabled : (card.default_card==1)}" ng-disabled="card.default_card">Make it Default</a></td>
+												<td>{{card.card_added_on}}</td>
+												<td>
+													<label class="radiobox">
+													  <input type="radio" checked="(card.default_card ? 1 : 0)" value="{{card.id}}" ng-value="card.id" ng-model="booking.cardIdUser" />
+													  <span class="checkmark"></span>
+													</label>
+												</td>
+											  </tr>
+										</tbody>
+										<tbody ng-if="RiderCards.length == 0">
+											<tr>
+												<td colspan="6" class="text-center">No Card Found</td>
+											</tr>
+										</tbody>
+									</table>
+
+								</div>
+									
+								<hr class="confirm">
+								<div class="col-md-4"></div>
+								<div class="col-md-4 mt-2 mb-4 text-center">
+								<button data-target="#request_right_now_1" data-toggle="modal"  ng-if="paymentForNow" class="btn btn-primary ride-confirm-btn button-black">Process Request</button> 
+								<button ng-click="BookRideLater()" ng-if="paymentForLater" class="btn btn-primary ride-confirm-btn button-black">Process Request</button> 
+								
+								</div>
+							</div>
+						
+						
+						
+						
+						</div>
+									
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="modal fade" id="request_right_now" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-body ">
+						<div class="panel-body y">
+							<div class="col-sm-12 row text-center ">
+								<span class="request-now-text mt-4">Requesting a ride now</span>
+								<div class="col-md-12"><img class="loader-img  mt-2" src="/images/loader.gif"/></div>
+							
+								<div class="col-md-4"></div>
+								<div class="col-md-4 mt-5 mb-3 text-center"><button ng-click="cancelRightNow()" data-dismiss="modal"class="btn btn-primary ride-confirm-btn ">Cancel</button> </div>
+							</div>
+						</div>
+									
+					</div>
+				</div>
+			</div>
+		</div>
+			
+		
+		
+		<div class="modal fade" id="request_right_now_1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-body ">
+						<div class="panel-body confirm-body">
+							<div class="col-sm-12 row text-center ">								
+								<div class="col-md-12 text-center">	
+									<p class="request">You are requesting now a ride for <br><span class="userTopick1">{{booking.user_name}}</span> to be pickup at <span class="pickup-location">{{booking.pickup_location_address}}</span></p>
+								</div>
+								<div class="col-md-2"></div>
+								<div class="col-md-4 mt-4 text-center"><button ng-click="cancelRightNow()" data-dismiss="modal"class="btn btn-primary ride-confirm-btn button-black">Cancel</button> </div>
+								<div class="col-md-4 mt-4 text-center"><button ng-click="BookRideRightNow()" class="btn btn-primary ride-confirm-btn  ">Yes</button> </div>
+							</div>
+						</div>
+									
+					</div>
+				</div>
+			</div>
+		</div>
+		
+
+			
+			<div class="modal fade" id="show_confirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-body ">
+				  
+									<div class="panel-body confirm-body" ng-show="booking.confirmNow">
+										<div class="col-sm-12 row text-center">
+											<p>A driver will come and Pick <span class="userTopick">{{booking.user_name}}</span>
+											at the requested time at
+											<span class="pickup-location">{{booking.pickup_location_address}}</span>
+											</p>
+											<hr class="confirm">
+											<div class="col-md-4"></div>
+											<div class="col-md-4 text-center"><button ng-click="closeConfirm()" class="btn btn-primary ride-confirm-btn ">OK</button> </div>
+										</div>
+									</div>
+						</div>
+					</div>
+				</div>
+			</div>
+				
+			
+			<div class="modal fade" id="show_cardError" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-body ">
+									<div class="panel-body confirm-body" ng-show="cardAlert">
+										<div class="col-sm-12 row text-center">
+											<span class="close-dismiss"  ng-click="closeCard()" >×</span>
+											<p>You need to add a card for the payment method.</span>
+											</p>
+											<hr class="confirm">
+											<div class="col-md-4"></div>
+											<div class="col-md-4 text-center"><button data-toggle="modal" ng-click="closeCard()" data-target="#add_card" class="btn btn-primary ride-confirm-btn ">Add Card</button> </div>
+										</div>
+									</div>
+										
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+			<div class="modal fade" id="show_PaymentError" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+					<div class="modal-content">
+					
+					 <div class="">
+						<div class="col-sm-12">
+						  <button type="button" class="close" data-dismiss="modal" ng-click="closePayment()" style="font-size:32px;float:right;padding:5px;">&times;</button>
+						
+						</div>
+						
+					  </div>
+				  
+						<div class="modal-body ">
+							<div class="panel-body confirm-body" ng-show="paymentAlert">
+								<div class="col-sm-12  text-center">
+									<h2>Payment Unsuccessful</h2>
+									<p>Please update your payment method.</p>
+									<hr class="confirm">
+									<div class="row">
+										<div class="col-md-3"></div>
+										<div class="col-md-3 text-center">
+											<button data-toggle="modal" ng-click="closePayment()" data-target="#add_card" class="btn btn-primary ride-confirm-btn button-black ">Add Card</button> 
+										</div>
+										<div class="col-md-3 text-center">
+											<button ng-click="closeandCard();"  data-dismiss="modal" class="btn btn-primary ride-confirm-btn ">Update</button> 
+										</div>
+									</div>
+								</div>
+							</div>
+								
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+			<div class="modal fade" id="showRiderCardError" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+					<div class="modal-content">
+					
+						<div class="">
+							<div class="col-sm-12">
+							  <button type="button" class="close" data-dismiss="modal" style="font-size:32px;float:right;padding:5px;">&times;</button>						
+							</div>						
+						</div>				  
+						<div class="modal-body ">
+							<div class="panel-body confirm-body">
+								<div class="col-sm-12  text-center">
+									
+									<p>There is no available payment method option. Do you want to send a link to your Rider to add a payment method through Qudos Rider app or at rider portal at www.rideQudos.com to complete the ride Request.</p>
+									<hr class="confirm">
+									<div class="row">
+										<div class="col-md-4"></div>
+										<div class="col-md-4 text-center">
+											<button  data-dismiss="modal" class="btn btn-primary ride-confirm-btn ">Yes, Please Send Link</button> 
+										</div>
+										<div class="col-md-4 text-center">
+											
+										</div>
+									</div>
+								</div>
+							</div>
+								
+						</div>
+					</div>
+				</div>
+			</div>
+					
+
+			<div class="modal fade" id="add_card" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+         
+              <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                  <div class="row modaltitle">
+                    <div class="col-sm-12">
+                      <button type="button" class="close" data-dismiss="modal" style="font-size:32px;float:right;padding:5px;">&times;</button>
+                      <h5 id="mtitle" style="text-align: center;">Add Card </h5>
+                    </div>
+                    
+                  </div>
+                  <div class="modal-body ">
+				  
+				   <div class="col-sm-12">
+					
+					<form enctype="multipart/form-data" action="#" method="post"  name="myCardForm" id="payment-form">
+						<div class="row modalrow">
+							<div class="col-sm-12 text-center">
+							              
+								<div id="card-element"><!-- A Stripe Element will be inserted here. --></div>
+							
+								
+							</div>	
+							<div class="col-sm-12 text-center ">		
+								<!-- Used to display Element errors. -->
+								<div id="card-errors" role="alert"></div>					
+							</div>	   
+						</div>	   
+						<div class="row">
+							<div class="col-sm-12 addbtn">
+								<div class="btn-align" >
+								<button type="submit" class="button submit btn btn-primary btn-md">Save Card</button>
+								</div>
+							</div>
+						</div>
+					</form>
+
+					
+					</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+		
+		
+		
+		<div class="modal fade" id="no_User" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+					<div class="modal-content">
+					
+					 <div class="">
+						<div class="col-sm-12">
+						  <button type="button" class="close" data-dismiss="modal" ng-click="closePayment()" style="font-size:32px;float:right;padding:5px;">&times;</button>
+						
+						</div>
+						
+					  </div>
+				  
+						<div class="modal-body ">
+							<div class="panel-body confirm-body" ng-show="paymentAlert">
+								<div class="col-sm-12  text-center">
+									<h2>User is not registered with us.</h2>
+									<p>Please Register it first .</p>
+									<hr class="confirm">
+									<div class="row">
+										<div class="col-md-3"></div>
+										<div class="col-md-3 text-center">
+											<button  ng-click="closeNoUser()" data-dismiss="modal"  class="btn btn-primary ride-confirm-btn button-black ">Register it</button> 
+										</div>
+										<div class="col-md-3 text-center">
+											<button ng-click="closeandReBook();"  data-dismiss="modal" class="btn btn-primary ride-confirm-btn ">Update</button> 
+										</div>
+									</div>
+								</div>
+							</div>
+								
+						</div>
+					</div>
+				</div>
+		</div>
+			
+		
+			
+		<div class="modal fade" id="add_myUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                  <div class="row modaltitle">
+                    <div class="col-sm-11 col-12">
+                      <button type="button" class="close" data-dismiss="modal" style="font-size:32px;float:right;padding:5px;">&times;</button>
+                      <h5 id="mtitle" style="text-align: center;">Add User to Account</h5>
+                    </div>
+                    
+                  </div>
+                  <div class="modal-body ">
+                   
+                      <div class="row modalrow">
+                          <div class="col-md-8 offset-md-2 text-center"><p>An OTP is sent to {{userMobileToAdd}} and need to be entered below for the new ride request to proceed.</p></div>
+                          <div class="col-sm-6 text-center col-sm-offset-3">
+                              <label>Enter OTP</label>                            
+                              <div class="input-container text-center">
+                                <input type="text" placeholder="0000" ng-model="otpToAdd" class="form-control  text-center"> 
+                                <input type="hidden" ng-model="userToAdd" class="form-control  "> 
+                                <input type="hidden" ng-model="userMobileToAdd" class="form-control  "> 
+                              </div>                             
+                          </div>
+							<div class="col-sm-6 text-center col-sm-offset-3">
+								<div class="text-center">
+									<a href="javascript:;" class="callToAction" ng-click="reAddUser();">Resend OTP</a>
+								</div>
+							</div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-12 addbtn">
+                              <div class="btn-align" >
+                                  <button type="submit" ng-click="completeUserAdd()" class="btn btn-primary btn-md" ng-disable="submitText!='Submit'" style="border:1px solid #999;">Add User</button>
+                               </div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+		</div>
+			
+			
+<script>
+
+ $(document).ready(function() {
+	 $('#phone').focus();
+		$('#extPopTwo').val('+1');
+		$("#phone").intlTelInput({
+			initialCountry: 'us',
+			autoPlaceholder:"off"
+        });
+		
+		
+		
+		 $("#phone").on("countrychange", function(e, countryData) {  
+			console.log('value Changed');
+			
+            $('#extPopTwo').val('+' + countryData.dialCode); // do something with countryData
+            localStorage.setItem("countryCode",countryData.dialCode); // do something with countryData
+			angular.element($('#request_ride_later')).scope().showDirection(1);
+			//console.log('Changed to this ',countryData.dialCode);
+			
+			//angular.element($0).scope().promoCountryCode;
+			
+			//console.log(angular.element($0).scope().promoCountryCode.triggerHandler('change'));
+			
+			//console.log(angular.element($0).scope().showDirection(1));
+			
+			
+        });
+		 $('#date').datepicker({
+			//format: 'DD, mm MM yyyy',
+			format: 'yyyy-mm-dd, DD',
+			startDate: '0d',
+			autoclose: true,
+		 });
+		
+		/*$('.myautocomplete').hide();
+		
+		$('.closeAutocomplete').on('click',function(){
+			console.log('Clicked');
+			console.log($(this).data('id'));
+			console.log($(this).data('number'));
+			$('.myautocomplete').hide();
+		});
+		
+		$('.autocompleteClass').on('change',function(){
+			console.log('Changd ',$('.autocompleteClass').val());
+			if($('.autocompleteClass').val()!=''){
+				$('.myautocomplete').show();
+			}else{
+				$('.myautocomplete').hide();
+			}
+		})*/
+
+		var availableTags = [];
+
+		
+		
+	/*	$( function() {
+			var availableTags = [
+			  "ActionScript",
+			  "AppleScript",
+			  "Asp",
+			  "BASIC",
+			  "C",
+			  "C++",
+			  "Clojure",
+			  "COBOL",
+			  "ColdFusion",
+			  "Erlang",
+			  "Fortran",
+			  "Groovy",
+			  "Haskell",
+			  "Java",
+			  "JavaScript",
+			  "Lisp",
+			  "Perl",
+			  "PHP",
+			  "Python",
+			  "Ruby",
+			  "Scala",
+			  "Scheme"
+			];
+			
+			function getUsers(){
+				$.post(getStudentsbySchool,{school:$('#school').val()},function(res){
+					res = $.parseJSON(res);
+					availableTags = res.tags;					
+					availableTags = res.atags;
+					console.log(res);
+					console.log(res.atags);
+					restartAutoComplete();
+				})
+				
+			}
+			
+			getUsers();
+			
+		
+			
+			
+			$( "#userName" ).autocomplete({
+				source: availableTags,
+				minLength: 0,  
+				multiselect: true,
+				autoFocus: true,
+				select: function(event, ui) {
+					
+							
+					availableTags = jQuery.grep(availableTags, function(element) {
+						return element.value != ui.item.value;
+					});   
+					console.log(availableTags);
+					
+					$( "#userName" ).autocomplete('option', 'source', availableTags);
+					
+					setTimeout(function(){
+						//Changed();
+						$( "#autocomplete" ).val('');
+					},800);
+					$( "#autocomplete" ).val('');
+					log( ui.item ? "Selected: " + ui.item.label : "Nothing selected, input was " + this.value +" - "+ this.label);
+					
+					selectThisNumber(ui.item.value);
+					
+				},
+				open: function() {
+					$( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+				},
+				close: function() {
+					$( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+				}
+			});
+			
+			
+			
+			
+		  } );
+  
+		function selectThisNumber( val ) {
+			console.log(val);
+		}
+		function log( message ) {
+			//$( "<div>" ).text( message ).prependTo( "#studentResults" );
+			//$( "#studentResults" ).scrollTop( 0 );
+		}*/
+		$('#timePicker').datetimepicker({
+			pickDate: false,
+			minuteStep: 15,
+			pickerPosition: 'bottom-right',
+			format: 'hh:ii',
+			autoclose: true,
+			showMeridian: true,
+			startView: 1,
+			maxView: 1,
+		});
+				
+		setTimeout(function(){
+			 var countries = {
+				 '+1':'US',
+				 '+91':'IN',	
+				 '+7': "RU",
+				 '+20': "EG",
+				 '+27': "ZA",
+				 '+30': "GR",
+				 '+31': "NL",
+				 '+32': "BE",'+33': "FR",'+34': "ES",'+36': "HU",'+39': "IT",'+40': "RO",'+41': "CH",'+43': "AT",'+44': "GB",'+45': "DK",'+46': "SE",'+47': "SJ",'+48': "PL",'+49': "DE",'+51': "PE",'+52': "MX",'+53': "CU",'+54': "AR",'+55': "BR",'+56': "CL",'+57': "CO",'+58': "VE",'+60': "MY",'+61': "CC",'+62': "ID",'+63': "PH",'+64': "NZ",'+65': "SG",'+66': "TH",'+81': "JP",'+82': "KR",'+84': "VN",'+86': "CN",'+90': "TR",'+91': "IN",'+92': "PK",'+93': "AF",'+94': "LK",'+95': "MM",'+98': "IR",'+212': "MA",'+213': "DZ",'+216': "TN",'+218': "LY",'+220': "GM",'+221': "SN",'+222': "MR",'+223': "ML",'+224': "GN",'+225': "CI",'+226': "BF",'+227': "NE",'+228': "TG",'+229': "BJ",'+230': "MU",'+231': "LR",'+232': "SL",'+233': "GH",'+234': "NG",'+235': "TD",'+236': "CF",'+237': "CM",'+238': "CV",'+239': "ST",'+240': "GQ",'+241': "GA",'+242': "CG",'+243': "CD",'+244': "AO",'+245': "GW",'+246': "IO",'+248': "SC",'+249': "SD",'+250': "RW",'+251': "ET",'+252': "SO",'+253': "DJ",'+254': "KE",'+255': "TZ",'+256': "UG",'+257': "BI",'+258': "MZ",'+260': "ZM",'+261': "MG",'+262': "RE",'+263': "ZW",'+264': "NA",'+265': "MW",'+266': "LS",'+267': "BW",'+268': "SZ",'+269': "KM",'+290': "SH",'+291': "ER",'+297': "AW",'+298': "FO",'+299': "GL",'+350': "GI",'+351': "PT",'+352': "LU",'+353': "IE",'+354': "IS",'+355': "AL",'+356': "MT",'+357': "CY",'+358': "AX",'+359': "BG",'+370': "LT",'+371': "LV",'+372': "EE",'+373': "MD",'+374': "AM",'+375': "BY",'+376': "AD",'+377': "MC",'+378': "SM",'+379': "VA",'+380': "UA",'+381': "RS",'+382': "ME",'+385': "HR",'+386': "SI",'+387': "BA",'+389': "MK",'+420': "CZ",'+421': "SK",'+423': "LI",'+500': "GS",'+501': "BZ",'+502': "GT",'+503': "SV",'+504': "HN",'+505': "NI",'+506': "CR",'+507': "PA",'+508': "PM",'+509': "HT",'+590': "MF",'+591': "BO",'+593': "EC",'+594': "GF",'+595': "PY",'+596': "MQ",'+597': "SR",'+598': "UY",'+599': "AN",'+670': "TL",'+672': "NF",'+673': "BN",'+674': "NR",'+675': "PG",'+676': "TO",'+677': "SB",'+678': "VU",'+679': "FJ",'+680': "PW",'+681': "WF",'+682': "CK",'+683': "NU",'+685': "WS",'+686': "KI",'+687': "NC",'+688': "TV",'+689': "PF",'+690': "TK",'+691': "FM",'+692': "MH",'+850': "KP",'+852': "HK",'+853': "MO",'+855': "KH",'+856': "LA",'+872': "PN",'+880': "BD",'+886': "TW",'+960': "MV",'+961': "LB",'+962': "JO",'+963': "SY",'+964': "IQ",'+965': "KW",'+966': "SA",'+967': "YE",'+968': "OM",'+970': "PS",'+971': "AE",'+972': "IL",'+973': "BH",'+974': "QA",'+975': "BT",'+976': "MN",'+977': "NP",'+992': "TJ",'+993': "TM",'+994': "AZ",'+995': "GE",'+996': "KG",'+998': "UZ",'+1268': "AG",'+1664': "MS",
+				 
+			 };
+			$('#phone').focus();
+			console.log($('#phone').val());
+			if($('#phone').val().split('-').length>1){
+				var phone_parts = $('#phone').val().split('-');
+				$('#phone').val(phone_parts[1]);
+				let countryToSet = (countries[phone_parts[0]]) ? countries[phone_parts[0]] : 'US';
+				$("#phone").intlTelInput("setCountry", countryToSet);
+			}
+		
+		},800)
+		
+		
+		
+		$(document).on('show.bs.modal', '.modal', function (event) {
+            var zIndex = 1040 + (10 * $('.modal:visible').length);
+            $(this).css('z-index', zIndex);
+            setTimeout(function() {
+                $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+            }, 0);
+        });
+		$(document).on('hide.bs.modal','#show_confirmation', function () {
+			console.log('rl');
+			//window.location.reload();
+		});
+		$(document).on('hide.bs.modal','#add_to_account', function () {
+			console.log('cancelAndUnselect');
+			//window.location.reload();
+		});
+		
+	});
+</script>

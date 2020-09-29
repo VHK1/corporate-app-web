@@ -1,0 +1,309 @@
+<header class="header header--white">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="header__content">
+						<a ng-click="homelink()" class="header__logo">
+							<img ng-src="img/logo--white.svg" alt='logo'>
+
+							<!-- <object type="image/svg+xml" data="img/logo--white.svg"></object> -->
+							<!-- <object type="image/svg+xml" data="img/logo--black.svg"></object> -->
+              <!-- <object type="image/svg+xml" data="img/logo--white.svg"></object> -->
+						</a>
+
+						<nav class="header__nav">
+                            <!--<a href="driverlogin.html">Drive</a>
+                            <a href="riderlogin.html">Ride</a>-->
+                            <a href="javascript:;" ng-click="startAgain()">Home</a>
+
+                            <div class="header__social">
+                                <a href="https://twitter.com/ridequdos"><i class="icon-tw"></i></a>
+                                <a href="https://www.facebook.com/QudosRide/"><i class="icon-fb"></i></a>
+                                <a href="https://www.linkedin.com/company/ridequdos/"><i class="icon-linkedin"></i></a>
+                                <a href="https://www.instagram.com/qudosride/"><i class="icon-instagram"></i></a>
+							</div>
+						</nav>
+
+						<button class="header__menu" type="button">
+							<span></span>
+							<span></span>
+							<span></span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+    <section class="sign">
+        <div class="container" id="login_container">
+            <div class="row">
+                <div class="col-12 col-xl-10 offset-xl-1">
+                    <div class="sign__content">
+                        <div class="row">
+
+                <div class="popup-main-content">
+
+                    <!--Start Inner Row-->
+                   <div id="main-login" class="row"  ng-show="!otpVerified&&!forgotStarted&&!OTPStarted&&loginMode">
+
+                    <div class="col-md-6">
+                        <h3>Corporate Sign In</h3>
+                       <span style="color: #212529;">Qudos creates the opportunity for our drivers to build the business they truly want.</span>
+                    </div>
+                    <div class="col-md-6">
+
+                    <div class="login-form">
+                    <form name="login" >
+                        <label>Mobile Number</label>
+                        <div class="row-input ">
+							<input id="mobile" ng-model="loginDriver.mobile" ng-disabled='isDisable' ng-enter="loginDriverFn()" class="mobiled" type="text" name="phone" ng-keypress="pressLoginEnter($event)"  ng-blur="formatMobileNumber()"  placeholder="800-000-0000"  autocomplete="off"  required onkeypress="return isNumberKey(event)">
+							<span class="main-mobile hidden">+1-</span>
+							<input id="extPopTwo" type="hidden" class="hidden"/>
+							
+                        </div>
+						<label>Password <a id="forget"  href="javascript:;" ng-click="forgotStart()" ><strong>Forgot it?</strong></a></label>
+                      
+                        <div class="row-input ">
+                          <span class="icon_input position-absolute"><img ng-src="images/key.png"></span>
+
+                          <input id="password" value="" ng-disabled='isDisable' ng-enter="loginDriverFn()" name="password" ng-model="loginDriver.password"  class="password" name="password" type="password" placeholder="Enter Password" focus="true" autocomplete="off" minlength="6" ng-model="loginDriver.password" required>
+                      </div>
+
+                    <button class="submit userloginButton" ng-click="loginDriverFn()" type="button" ng-disabled='isDisable'>Login</button>
+					<button class="signup_btn" ui-sref="corporate_signup"  type="button">Signup</button>
+                  </form>
+
+                  <div ng-if="loadings" class="loaders"> <span><img src="app/img/ring-alt.svg"></span></div>
+
+
+                </div>
+
+                </div>
+
+                </div>
+                <!--End inner Row-->
+
+
+                <!--Start Inner Row1-->
+                <div id="reset1" ng-show="!loginMode&&forgotMode"  class="row ">
+
+                    <div class="col-md-6">
+                        <h3>Reset Password</h3>
+                        Enter your number and we will send you a OTP to reset your password.
+                    </div>
+                    <div class="col-md-6">
+
+                    <div class="login-form">
+                    <form name="login">
+                        <label>Mobile Number</label>
+                        <div class="row-input" style="margin-bottom:15px !important;">
+                            <input id="mobile1" class="mobiled" type="tel" ng-model="forgot.mobile" 
+                             name="mobile1" onkeypress="return isNumberKey(event)" inputmode="numeric" placeholder="800-000-000" required>
+							<input id="extPopThree" type="hidden" class="hidden"/>
+                        </div>
+                        <button id="reset-2" class="submit" type="button" ng-disabled="DisableOtp" ng-click="requestOTP()">Send OTP</button>
+                        <!-- <button id="reset-2" class="submit" type="button"  ng-click="showVerify()">Verify</button> -->
+                    </form>
+                    <div ng-if="loadings" class="loaders" > <span><img src="app/img/ring-alt.svg"></span></div>
+                </div>
+
+
+                </div>
+
+                </div>
+                <!--Start Inner Row1-->
+
+
+
+                <!--Start Inner Row2-->
+                <div id="reset2" ng-show="!loginMode&&!forgotMode&&otpVerifyMode&&otpSent"  class="row ">
+
+
+
+                    <div id="main-hidden" class="col-md-5">
+                                <h3>OTP Confirmation</h3>
+
+                            </div>
+
+                            <div id="main-hidden1" class="col-md-7">
+                            Whether our users prefer a familiar face for the majority of their rides or want a particular type of car for a particular situation, Qudos can deliver an experience that is consistent with our riders’ wants.
+                            </div>
+                    <div class="col-md-6">
+
+                    <div class="login-form"><br>
+
+                        <p>Confirm your mobile number to reset your password</p>
+                    <form name="login">
+                        <label>Enter OTP sent to your Mobile number</label>
+                        <div class="row-input">
+                        <input id="otp"  type="tel" ng-model="otp" onkeypress="return isNumberKeys(event)" maxlength="4" inputmode="numeric" placeholder="0000" required>
+                            <div class="row row-input a-color">
+                                    <div class="col-xs-5"><button class="btn-links" ng-disabled="DisableRegenrate" href="javascript:;" ng-click="regenerateOTP()">Resend OTP</button></div>
+                                    <div class="col-xs-7"><a href="javascript:;" ng-click="changeNum()">Change Mobile number</a></div>
+                                </div>
+
+                        </div>
+
+
+                    <button id="reset-3" class="submit top-margin" ng-disabled="DisableVerifyOtp" type="button"  ng-click="verifyOTP()" >Submit</button>
+                  </form>
+                </div>
+                </div>
+                </div>
+                <!--Start Inner Row2-->
+
+                <!--Start Inner Row3-->
+                <div id="reset3"  ng-show="!loginMode&&!forgotMode&&resetMode&&!otpVerifyMode"  class="row">
+                   <div class="col-md-6">
+                         <h3>Reset Password</h3>
+                        Qudos continues to act as the catalyst for lasting connections between drivers and riders. Hang on there, you will get back in track in no time.
+                    </div>
+                    <div class="col-md-6">
+
+                        <div class="login-form">
+                            <form name="login">
+                                <label>Enter New Password</label>
+                                <div class="row-input">
+                                    <span class="icon_input position-absolute"><img ng-src="images/key.png"></span>
+                                 <input id="passwordn" value="" name="passwordn" ng-model="resetPass.password" class="password"  type="password" placeholder="Enter new password">
+
+                                </div>
+                                <label>Confirm New Password</label>
+                                <div class="row-input">
+                                    <span class="icon_input position-absolute"><img ng-src="images/key.png"></span>
+                                  <input id="passwordnc" value="" name="passwordnc" ng-model="resetPass.confirmpassword" class="password"  type="password" placeholder="Re-enter new password">
+
+                              </div>
+
+                            <button id="reset-4" class="submit" type="button"  ng-disabled="onloadDisble" ng-click="setPassword()">Submit</button>
+                          </form>
+                       </div>
+                    </div>
+							
+                    
+                </div>
+                <!--Start Inner Row3-->
+
+                <!--Start Inner Row4-->
+
+                <div id="reset4" ng-show="!loginMode&&!forgotMode&&!resetMode&&!otpVerifyMode&&resetSuccess" class="row row-input ">
+                        <div class="col-md-12"><p class="small-show"><img src="img/tick.png"  alt="sucess">
+                                 </p></div>
+                          <div class="col-md-6">
+                                        <h3>Reset Successfully</h3>
+                            <p class="top-margin">Your Password has been successfuly changed, you can now continue to login. </p>
+                                <div class="row clear">
+
+                                    <div class="col-md-12">
+
+                                        <a id="login-main" ng-click="switchToLogin()" class="submit-login submit">Go to Login</a>
+
+
+
+
+                                    </div>
+
+
+                                </div>
+
+                          </div>
+
+                                 <div class="col-md-6 small-hide">
+                                 <p align="center"><img src="img/tick.png" width="180" height="180" alt="sucess">
+                                 </p>
+                                 </div>
+                       </div>
+                <!--End Inner Row4-->
+
+            </div><!--End Main Content Popup-->
+      </div>
+      <!--End Row-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+	
+	
+
+    <script>
+	
+	
+		$('#mobile').focus();
+		$('#extPopTwo').val('+1');
+		$('#extPopThree').val('+1');
+		$("#mobile").intlTelInput({
+			initialCountry: 'us',
+			autoPlaceholder:"off"
+        });
+		
+		 $("#mobile").on("countrychange", function(e, countryData) {         
+            $('#extPopTwo').val('+' + countryData.dialCode); // do something with countryData
+            localStorage.setItem("countryCode",countryData.dialCode); // do something with countryData
+        });
+		
+		
+		
+		
+		
+		$("#mobile1").intlTelInput({
+			initialCountry: 'us',
+			autoPlaceholder:"off"
+        });
+		
+		 $("#mobile1").on("countrychange", function(e, countryData) {         
+            $('#extPopThree').val('+' + countryData.dialCode); // do something with countryData
+            localStorage.setItem("countryCode",countryData.dialCode); // do something with countryData
+        });
+		
+		
+		
+        $(document).ready(function() {
+			$('.modal-backdrop.show').remove();
+            App.controller('customerLoginController', function($rootScope, $scope, $http, $cookies, $cookieStore, MY_CONSTANT, $state, ngDialog) {
+                if (localStorage.getItem('userModel') != null) {
+                    $state.reload();
+                  
+                }
+            });
+			$('body').addClass('login-page');
+        });
+        window.onbeforeunload = WindowCloseHanlder;
+        function WindowCloseHanlder()
+        {
+            
+            App.controller('customerLoginController', function($rootScope, $scope, $http, $cookies, $cookieStore, MY_CONSTANT, $state, ngDialog) {
+                if (!$cookieStore.get('web_access_token')) {
+                    window.location.href = 'http://qudos.tech/affiliatelogin.html';
+                }
+            });
+        }
+	
+	
+		function isNumberKey(evt)
+		{
+            var charCode = (evt.which) ? evt.which : event.keyCode;
+				
+					
+					if (charCode == 43) return true;
+					
+					if  (charCode < 48 || charCode > 57)
+					 return false;
+		
+				  return true;
+		}
+
+        function isNumberKeys(evt)
+		{
+            var charCode = (evt.which) ? evt.which : event.keyCode;
+				
+					
+					
+					if  (charCode < 48 || charCode > 57)
+					 return false;
+		
+				  return true;
+		}
+
+    </script>

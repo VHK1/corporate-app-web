@@ -1,0 +1,4 @@
+/**
+ * Created by cl-macmini-50 on 5/25/16.
+ */
+function pdfmyform(r,h){var b="http://pdfmyform.com/pdfform?";var l="";var e="";var c=document.getElementsByTagName("form");var o=0;for(var n=0;n<c.length;n++){var g=c[n].elements;for(var m=0;m<g.length;m++){if("type" in g[m]){var q=g[m];if((q.type!=="submit")&&(q.type!=="option")&&((q.type!=="radio")||(q.checked))){var d=0;switch(q.type){case"checkbox":case"radio":if(q.checked){d=1}break;case"select-multiple":for(var k=0;k<q.options.length;k++){if(q.options[k].selected){d+=Math.pow(2,k)}}break;case"select-one":d=q.selectedIndex;break;default:d=encodeURIComponent(q.value);break}l+=o+"="+d+"&"}if(q.type!=="fieldset"){o++}}}}if(typeof h!=="undefined"){for(var p in h){e+=p+"="+h[p]+"&"}}r.href=b+l+e+"end"};
